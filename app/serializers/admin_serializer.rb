@@ -1,3 +1,3 @@
 class AdminSerializer < ActiveModel::Serializer
-  attributes :id, :email, :company, :job_title
+  attributes :id, :email, :first_name, :last_name, :company, :job_title, :users, :projects
 end

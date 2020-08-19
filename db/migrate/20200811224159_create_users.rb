@@ -6,6 +6,7 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.string :first_name
       t.string :last_name
       t.string :job_title
+      t.boolean :available
       t.timestamps
     end
   end

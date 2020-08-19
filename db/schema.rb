@@ -52,6 +52,8 @@ ActiveRecord::Schema.define(version: 2020_08_11_224213) do
     t.string "first_name"
     t.string "last_name"
     t.string "job_title"
+    t.boolean "available"
+    t.boolean "assigned"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
