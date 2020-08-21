@@ -15,24 +15,24 @@ admin_1 = Admin.create(
 project_1 = Project.create(
   name: "Riviera SaaS website",
   description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, est.",
-  start_date: "August 8th - 2020",
-  due_date: "December 5th - 2020",
+  start_date: "08-25-2020",
+  due_date: "09-20-2020",
   admin: admin_1
 )
 
 project_2 = Project.create(
   name: "Riviera SaaS mobile app",
   description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, est.",
-  start_date: "August 8th - 2020",
-  due_date: "December 8th - 2020",
+  start_date: "08-27-2020",
+  due_date: "09-20-2020",
   admin: admin_1
 )
 
 project_3 = Project.create(
-  name: "Riviera SaaS Marketing Strategy",
+  name: "Riviera SaaS Website Menu",
   description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, est.",
-  start_date: "August 8th - 2020",
-  due_date: "December 8th - 2020",
+  start_date: "08-21-2020",
+  due_date: "09-20-2020",
   admin: admin_1
 )
 

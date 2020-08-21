@@ -6,25 +6,31 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    # [1,2,3]
+    users = params[:assigned]
+    project = Project.create( name: params[:name], description: params[:description], start_date: params[:startDate], due_date: params[:dueDate], admin_id: params[:admin] )
+    assignedUsers = []
 
-    byebug
-    users = params[:users]
-    project = Project.create(
-      name: params[:name],
-      description: params[:description],
-      start_date: params[:startDate],
-      due_date: params[:dueDate]
-    )
+    if project.valid? 
+      users.each do |user_id|
+        user = User.find_by(id: user_id.to_i)
+        ProjectTree.create(
+          user: user,
+          project: project
+        ) 
 
-    users.each do |user_id|
-      user = User.find_by(id: user_id)
-      ProjectTree.create(
-        user: user,
-        project: project
-      ) 
+        if user.projects.count === 3 
+          user.update(available: false)
+        end 
+
+        assignedUsers << UserSerializer.new(user)
+        # byebug
+      end
+
+      render json: { project: project, users: assignedUsers }
+    else
+      render json: { error: project.errors.full_messages }, status: :bad_request
     end
-
+    # byebug
   end
 end
 
