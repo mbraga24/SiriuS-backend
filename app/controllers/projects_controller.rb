@@ -5,6 +5,12 @@ class ProjectsController < ApplicationController
     render json: projects
   end
 
+  def show
+    project = Project.find_by(id: params[:id])
+
+    render json: project
+  end
+
   def create
     users = params[:assigned]
     project = Project.create( name: params[:name], description: params[:description], start_date: params[:startDate], due_date: params[:dueDate], admin_id: params[:admin] )
@@ -33,9 +39,3 @@ class ProjectsController < ApplicationController
     # byebug
   end
 end
-
-# name: fields.title,
-# description: fields.description,
-# startDate: startDate,
-# dueDate: dueDate,
-# admin: keyHolder.id

@@ -5,8 +5,9 @@ Rails.application.routes.draw do
   # get 'users/:id', to: 'users#show'
   # get '/users', to: 'users#index'
 
-  resources :projects, only: [:index, :create]
+  resources :projects, only: [:index, :create, :show]
   # get '/projects', to: 'projects#index'
+  # get '/show/:id', to: 'projects#show'
   # post '/projects', to: 'projects#create'
 
   resources :admins , only: [:index, :show]
