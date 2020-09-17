@@ -13,7 +13,7 @@ class ProjectsController < ApplicationController
 
   def create
     users = params[:assigned]
-    project = Project.create( name: params[:name], description: params[:description], start_date: params[:startDate], due_date: params[:dueDate], admin_id: params[:admin] )
+    project = Project.create( name: params[:name], description: params[:description], start_date: params[:startDate], due_date: params[:dueDate] )
     assignedUsers = []
 
     if project.valid? 
