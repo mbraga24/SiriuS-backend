@@ -45,12 +45,19 @@ class ProjectsController < ApplicationController
     # byebug
   end
 
+
+  # =======================================================
+  # NOT SURE IF IT'S WORKING -----
+  # =======================================================
   def complete
     project = Project.find_by(id: params[:id])
     project.toggle!(:done)
     render json: project
   end
 
+  # =======================================================
+  # NOT WORKING ON THIS FEATURE YET -----
+  # =======================================================
   def delete_all_complete
     # destroy all projects
   end
