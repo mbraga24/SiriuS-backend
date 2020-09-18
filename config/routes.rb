@@ -8,14 +8,12 @@ Rails.application.routes.draw do
   # patch 'users/:id', to: 'users#update'
   # get 'users/:id', to: 'users#show'
   # get '/users', to: 'users#index'
-  
-  # get '/user/projects/:id', to: 'users#user_project' <=== ??
 
   resources :projects, only: [:index, :create, :show]
+  get '/project/complete/:id', to: 'projects#complete'
   # get '/projects', to: 'projects#index'
   # get '/show/:id', to: 'projects#show'
   # post '/projects', to: 'projects#create'
+  # delete '/projects', to: 'projects#delete_all_complete'
 
-  # resources :admins , only: [:index, :show]
-  # get '/admins/account/:id', to: 'admins#show'
 end

@@ -44,4 +44,14 @@ class ProjectsController < ApplicationController
     end
     # byebug
   end
+
+  def complete
+    project = Project.find_by(id: params[:id])
+    project.toggle!(:done)
+    render json: project
+  end
+
+  def delete_all_complete
+    # destroy all projects
+  end
 end
