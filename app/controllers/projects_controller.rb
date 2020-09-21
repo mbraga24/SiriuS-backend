@@ -50,6 +50,7 @@ class ProjectsController < ApplicationController
   # NOT SURE IF IT'S WORKING -----
   # =======================================================
   def complete
+    # byebug
     project = Project.find_by(id: params[:id])
     project.toggle!(:done)
     render json: project
