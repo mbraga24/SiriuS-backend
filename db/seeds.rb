@@ -15,7 +15,7 @@ project_2 = Project.create(
   description: "This is a new account and a very important client. The team will be respossible for X and Y and we will be holding morning stand-up meetings for about 10-15 minutes to discuss our daily goals. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me any time of the day: (333)-444-9009",
   start_date: "08-27-2020",
   due_date: "09-20-2020",
-  done: false
+  done: true
 )
 
 project_3 = Project.create(
@@ -24,6 +24,22 @@ project_3 = Project.create(
   start_date: "08-21-2020",
   due_date: "09-20-2020",
   done: true
+)
+
+project_4 = Project.create(
+  name: "Finish Resume",
+  description: "This is a new account and a very important client. The team will be respossible for X and Y and we will be holding morning stand-up meetings for about 10-15 minutes to discuss our daily goals. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me any time of the day: (333)-444-9009",
+  start_date: "08-21-2020",
+  due_date: "09-20-2020",
+  done: false
+)
+
+project_5 = Project.create(
+  name: "Finish editing projects",
+  description: "This is a new account and a very important client. The team will be respossible for X and Y and we will be holding morning stand-up meetings for about 10-15 minutes to discuss our daily goals. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me any time of the day: (333)-444-9009",
+  start_date: "08-21-2020",
+  due_date: "09-20-2020",
+  done: false
 )
 
 marlon = User.create(
@@ -145,6 +161,20 @@ random_users().each do |user|
     user: user,
     project: project_3
   )
+end
+
+random_users().each do |user|
+  ProjectTree.create(
+    user: user,
+    project: project_4
+  )
+
+  random_users().each do |user|
+    ProjectTree.create(
+      user: user,
+      project: project_5
+    )
+  end
 end
 
 Project.all.each do |pro|

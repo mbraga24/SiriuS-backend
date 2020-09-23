@@ -38,19 +38,13 @@ class ProjectsController < ApplicationController
         # byebug
       end
 
-      render json: { project: project, users: assignedUsers }
+      render json: { project: project, users: assignedUsers }, status: :created
     else
       render json: { error: project.errors.full_messages }, status: :bad_request
     end
-    # byebug
   end
 
-
-  # =======================================================
-  # NOT SURE IF IT'S WORKING -----
-  # =======================================================
   def complete
-    # byebug
     project = Project.find_by(id: params[:id])
     project.toggle!(:done)
     render json: project
@@ -58,11 +52,22 @@ class ProjectsController < ApplicationController
 
   def delete_all_complete
     complete_projects = Project.all.select{ |project| project.done } 
-    Project.all.each do |project| 
-      if project.done == true 
-        project.destroy
+  
+    # collect all users who are unavailable for working 3 projects
+    users = complete_projects.collect do |project|
+      project.users.select do |user|
+        user.available == false
       end
+    end[0]
+
+    if complete_projects && users
+      Project.all.each do |project| 
+        if project.done == true 
+          project.destroy
+        end
+      end
+
+      render json: { header: "Completed projects deleted successfully", deleted_projects: complete_projects, available_users: users }, status: :ok
     end
-    render json: complete_projects
   end
 end
