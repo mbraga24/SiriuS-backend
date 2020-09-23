@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   # get '/users', to: 'users#index'
 
   resources :projects, only: [:index, :create, :show]
-  get '/project/complete/:id', to: 'projects#complete'
+  patch '/project/complete/:id', to: 'projects#complete'
   # get '/projects', to: 'projects#index'
   # get '/show/:id', to: 'projects#show'
   # post '/projects', to: 'projects#create'
