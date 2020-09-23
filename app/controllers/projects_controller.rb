@@ -1,13 +1,11 @@
 class ProjectsController < ApplicationController
   def index
     projects = Project.all
-
     render json: projects
   end
 
   def show
     project = Project.find_by(id: params[:id])
-
     render json: project
   end
 
@@ -52,10 +50,10 @@ class ProjectsController < ApplicationController
 
   def delete_all_complete
     # collect all projects before destroying
-    complete_projects = Project.all.select{ |project| project.done } 
+    projects = Project.all.select{ |project| project.done } 
   
     # collect all users who are unavailable for working 3 projects
-    users = complete_projects.collect do |project|
+    users = projects.collect do |project|
       project.users.select do |user|
         if user.available == false
           user.toggle!(:available)
@@ -70,6 +68,6 @@ class ProjectsController < ApplicationController
       end
     end
 
-    render json: { header: "Completed projects deleted successfully", deleted_projects: complete_projects, available_users: users }, status: :ok
+    render json: { header: "Completed projects deleted successfully", available_users: users }, status: :ok
   end
 end
