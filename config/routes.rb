@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   resources :projects, only: [:index, :create, :show]
   patch '/project/complete/:id', to: 'projects#complete'
+  patch '/projects/clear', to: 'projects#delete_all_complete'
   # get '/projects', to: 'projects#index'
   # get '/show/:id', to: 'projects#show'
   # post '/projects', to: 'projects#create'

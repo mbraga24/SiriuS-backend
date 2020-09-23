@@ -56,10 +56,13 @@ class ProjectsController < ApplicationController
     render json: project
   end
 
-  # =======================================================
-  # NOT WORKING ON THIS FEATURE YET -----
-  # =======================================================
   def delete_all_complete
-    # destroy all projects
+    complete_projects = Project.all.select{ |project| project.done } 
+    Project.all.each do |project| 
+      if project.done == true 
+        project.destroy
+      end
+    end
+    render json: complete_projects
   end
 end
