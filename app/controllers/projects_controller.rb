@@ -51,23 +51,25 @@ class ProjectsController < ApplicationController
   end
 
   def delete_all_complete
+    # collect all projects before destroying
     complete_projects = Project.all.select{ |project| project.done } 
   
     # collect all users who are unavailable for working 3 projects
     users = complete_projects.collect do |project|
       project.users.select do |user|
-        user.available == false
+        if user.available == false
+          user.toggle!(:available)
+        end
       end
     end[0]
 
-    if complete_projects && users
-      Project.all.each do |project| 
-        if project.done == true 
-          project.destroy
-        end
+    # delete all projects that are true
+    Project.all.each do |project| 
+      if project.done == true 
+        project.destroy
       end
-
-      render json: { header: "Completed projects deleted successfully", deleted_projects: complete_projects, available_users: users }, status: :ok
     end
+
+    render json: { header: "Completed projects deleted successfully", deleted_projects: complete_projects, available_users: users }, status: :ok
   end
 end

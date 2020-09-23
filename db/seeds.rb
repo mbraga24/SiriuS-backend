@@ -23,24 +23,24 @@ project_3 = Project.create(
   description: "This is a new account and a very important client. The team will be respossible for X and Y and we will be holding morning stand-up meetings for about 10-15 minutes to discuss our daily goals. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me any time of the day: (333)-444-9009",
   start_date: "08-21-2020",
   due_date: "09-20-2020",
-  done: true
-)
-
-project_4 = Project.create(
-  name: "Finish Resume",
-  description: "This is a new account and a very important client. The team will be respossible for X and Y and we will be holding morning stand-up meetings for about 10-15 minutes to discuss our daily goals. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me any time of the day: (333)-444-9009",
-  start_date: "08-21-2020",
-  due_date: "09-20-2020",
   done: false
 )
 
-project_5 = Project.create(
-  name: "Finish editing projects",
-  description: "This is a new account and a very important client. The team will be respossible for X and Y and we will be holding morning stand-up meetings for about 10-15 minutes to discuss our daily goals. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me any time of the day: (333)-444-9009",
-  start_date: "08-21-2020",
-  due_date: "09-20-2020",
-  done: false
-)
+# project_4 = Project.create(
+#   name: "Finish Resume",
+#   description: "This is a new account and a very important client. The team will be respossible for X and Y and we will be holding morning stand-up meetings for about 10-15 minutes to discuss our daily goals. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me any time of the day: (333)-444-9009",
+#   start_date: "08-21-2020",
+#   due_date: "09-20-2020",
+#   done: false
+# )
+
+# project_5 = Project.create(
+#   name: "Finish editing projects",
+#   description: "This is a new account and a very important client. The team will be respossible for X and Y and we will be holding morning stand-up meetings for about 10-15 minutes to discuss our daily goals. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me any time of the day: (333)-444-9009",
+#   start_date: "08-21-2020",
+#   due_date: "09-20-2020",
+#   done: false
+# )
 
 marlon = User.create(
   email: "admin@example.com",
@@ -130,6 +130,17 @@ will = User.create(
   admin: false
 )
 
+def checkProjectCount(user, assign_project)
+  if user.projects.count < 3 
+    ProjectTree.create(
+      user: user,
+      project: assign_project
+    )
+  else
+    return nil
+  end
+end
+
 ALLOW_USERS = User.all.find_all do |user|
   user.email != 'will@example.com' && user.email != 'john@example.com' && user.email != "admin@example.com"
 end
@@ -143,39 +154,24 @@ def random_users
 end
 
 random_users().each do |user|
-  ProjectTree.create(
-    user: user,
-    project: project_1
-  )
+  checkProjectCount(user, project_1)
 end
 
 random_users().each do |user|
-  ProjectTree.create(
-    user: user,
-    project: project_2
-  )
+  checkProjectCount(user, project_2)
 end
 
 random_users().each do |user|
-  ProjectTree.create(
-    user: user,
-    project: project_3
-  )
+  checkProjectCount(user, project_3)
 end
 
-random_users().each do |user|
-  ProjectTree.create(
-    user: user,
-    project: project_4
-  )
+# random_users().each do |user|
+#   checkProjectCount(user, project_4)
+# end
 
-  random_users().each do |user|
-    ProjectTree.create(
-      user: user,
-      project: project_5
-    )
-  end
-end
+# random_users().each do |user|
+#   checkProjectCount(user, project_5)
+# end
 
 Project.all.each do |pro|
   ProjectTree.create(
