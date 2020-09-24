@@ -110,7 +110,13 @@ class UsersController < ApplicationController
     elsif user.valid? &&  user.projects.count < 2
       render json: user
     else
-      render json: {message: "Something went wrong!"}, status: :bad_request
+      render json: { message: "Something went wrong!" }, status: :bad_request
     end
+  end
+
+  def destroy
+    user = User.find_by(id: params[:id])
+    user.destroy
+    render json: user
   end
 end
