@@ -114,6 +114,22 @@ class UsersController < ApplicationController
     end
   end
 
+  def remove_project
+    # find project and user by their id
+    project = Project.find_by(id: params[:project_id])
+    user = User.find_by(id: params[:user_id])
+    
+    # change user's availability if user has a total of 3 projects 
+    if user.projects.count === 3 
+      user.toggle!(:available)
+    end
+    # delete the association between the given project and user 
+    ProjectTree.find_by(user_id: user.id, project_id: project.id).destroy
+
+    # return updated user to update redux store in the frontend
+    render json: user
+  end
+
   def destroy
     user = User.find_by(id: params[:id])
     user.destroy

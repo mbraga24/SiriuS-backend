@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   post '/login', to: 'users#login'
   get '/autologin/:id', to: 'users#autologin'
   get '/admin/:id', to: 'users#admin'
-
+  delete 'users/:user_id/remove-project/:project_id', to: 'users#remove_project'
+  # delete 'user/:id/remove/project/:id', to: 'users#remove_project'
+  
   # patch 'users/:id', to: 'users#update'
   # get 'users/:id', to: 'users#show'
   # get '/users', to: 'users#index'
