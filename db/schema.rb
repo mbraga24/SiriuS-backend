@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_17_234924) do
+ActiveRecord::Schema.define(version: 2020_09_25_211714) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "documents", force: :cascade do |t|
+    t.string "name"
+    t.string "pdf"
+    t.bigint "project_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_id"], name: "index_documents_on_project_id"
+  end
 
   create_table "project_trees", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -47,6 +56,7 @@ ActiveRecord::Schema.define(version: 2020_09_17_234924) do
     t.boolean "admin", default: false
   end
 
+  add_foreign_key "documents", "projects"
   add_foreign_key "project_trees", "projects"
   add_foreign_key "project_trees", "users"
 end

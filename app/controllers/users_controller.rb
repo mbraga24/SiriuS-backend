@@ -38,7 +38,7 @@ class UsersController < ApplicationController
 
     #   # if it validates to true renders json: user & token ====> run user explicitly through serializer
       # render json: { user: userSerializer.new(user), token: token }
-      byebug
+      # byebug
       render json: user, status: :created
     else
 
