@@ -1,3 +1,3 @@
 class DocumentSerializer < ActiveModel::Serializer
-  attributes :id, :name, :pdf, :project_id
+  attributes :id, :name, :url, :project_id
 end

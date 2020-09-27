@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2020_09_25_211714) do
 
   create_table "documents", force: :cascade do |t|
     t.string "name"
-    t.string "pdf"
+    t.string "url"
     t.bigint "project_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

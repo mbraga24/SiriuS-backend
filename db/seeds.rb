@@ -42,6 +42,12 @@ project_3 = Project.create(
 #   done: false
 # )
 
+document_1 = Document.create(
+  name: "Just Some Flowers",
+  url: "https://res.cloudinary.com/dloh9txdc/image/upload/v1598121663/sample.jpg",
+  project_id: project_1.id
+)
+
 marlon = User.create(
   email: "admin@example.com",
   password: "12345",

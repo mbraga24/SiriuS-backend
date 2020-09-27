@@ -10,6 +10,6 @@ Rails.application.routes.draw do
   delete '/projects/clear', to: 'projects#delete_all_complete'
   patch '/project/complete/:id', to: 'projects#complete'
 
-  resources :documents, only: [:create]
+  resources :documents, only: [:index, :create]
 
 end
