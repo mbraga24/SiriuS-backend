@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 2020_09_25_211714) do
     t.string "description"
     t.string "start_date"
     t.string "due_date"
+    t.string "finish_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "done", default: false

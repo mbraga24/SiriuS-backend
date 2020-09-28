@@ -45,6 +45,7 @@ class ProjectsController < ApplicationController
   def complete
     project = Project.find_by(id: params[:id])
     project.toggle!(:done)
+    project[:close_date] = Time.now.strftime("%m/%d/%Y")
     render json: project
   end
 

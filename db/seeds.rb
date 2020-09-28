@@ -8,6 +8,7 @@ project_1 = Project.create(
   description: "This is a new account and a very important client. The team will be respossible for X and Y and we will be holding morning stand-up meetings for about 10-15 minutes to discuss our daily goals. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me any time of the day: (333)-444-9009",
   start_date: "08-25-2020",
   due_date: "09-20-2020",
+  finish_date: nil,
   done: false
 )
 
@@ -16,6 +17,7 @@ project_2 = Project.create(
   description: "This is a new account and a very important client. The team will be respossible for X and Y and we will be holding morning stand-up meetings for about 10-15 minutes to discuss our daily goals. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me any time of the day: (333)-444-9009",
   start_date: "08-27-2020",
   due_date: "09-20-2020",
+  finish_date: Time.now.strftime("%m/%d/%Y"),
   done: true
 )
 
@@ -24,6 +26,7 @@ project_3 = Project.create(
   description: "This is a new account and a very important client. The team will be respossible for X and Y and we will be holding morning stand-up meetings for about 10-15 minutes to discuss our daily goals. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me any time of the day: (333)-444-9009",
   start_date: "08-21-2020",
   due_date: "09-20-2020",
+  finish_date: nil,
   done: false
 )
 
