@@ -1,5 +1,6 @@
 ProjectTree.destroy_all
 Project.destroy_all
+Document.destroy_all
 User.destroy_all
 
 project_1 = Project.create(
@@ -41,12 +42,6 @@ project_3 = Project.create(
 #   due_date: "09-20-2020",
 #   done: false
 # )
-
-document_1 = Document.create(
-  name: "Just Some Flowers",
-  url: "https://res.cloudinary.com/dloh9txdc/image/upload/v1598121663/sample.jpg",
-  project_id: project_1.id
-)
 
 marlon = User.create(
   email: "admin@example.com",
@@ -134,6 +129,13 @@ will = User.create(
   company: "MonkeyGang Co,. Ltd.",
   available: false,
   admin: false
+)
+
+document_1 = Document.create(
+  name: "Just Some Flowers",
+  url: "https://res.cloudinary.com/dloh9txdc/image/upload/v1598121663/sample.jpg",
+  user: andrew,
+  project: project_1
 )
 
 def checkProjectCount(user, assign_project)

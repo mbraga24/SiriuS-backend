@@ -19,9 +19,11 @@ ActiveRecord::Schema.define(version: 2020_09_25_211714) do
     t.string "name"
     t.string "url"
     t.bigint "project_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["project_id"], name: "index_documents_on_project_id"
+    t.index ["user_id"], name: "index_documents_on_user_id"
   end
 
   create_table "project_trees", force: :cascade do |t|
@@ -57,6 +59,7 @@ ActiveRecord::Schema.define(version: 2020_09_25_211714) do
   end
 
   add_foreign_key "documents", "projects"
+  add_foreign_key "documents", "users"
   add_foreign_key "project_trees", "projects"
   add_foreign_key "project_trees", "users"
 end
