@@ -42,6 +42,32 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def add_new_users
+    # byebug
+    project = Project.find_by(id: params[:projectId])
+    params[:users].each do |u_id|
+      ProjectTree.create(
+        user_id: u_id,
+        project_id: project.id
+      )
+    end
+    new_users = []
+    params[:users].each do |u_id|
+      user = User.find_by(id: u_id)
+
+      # if user is assigned to 2 or more projects 
+      if user.projects.count >= 2
+        user.toggle!(:available)
+        new_users << UserSerializer.new(user)
+      else 
+      # if user is assigned to less than 2 projects
+        new_users << user
+      end 
+    end
+
+    render json: { users: new_users, project: ProjectSerializer.new(project) }
+  end
+
   def complete
     project = Project.find_by(id: params[:id])
     project.toggle!(:done)

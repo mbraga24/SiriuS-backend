@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :projects, only: [:index, :create, :show]
   delete '/projects/clear', to: 'projects#delete_all_complete'
   patch '/project/complete/:id', to: 'projects#complete'
+  patch '/add_user/project', to: 'projects#add_new_users'
 
   resources :documents, only: [:index, :create]
 
