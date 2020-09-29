@@ -45,10 +45,14 @@ class ProjectsController < ApplicationController
   def complete
     project = Project.find_by(id: params[:id])
     project.toggle!(:done)
-    project[:close_date] = Time.now.strftime("%m/%d/%Y")
+    # set the date when the project was completed
+    project[:finish_date] = Time.now.strftime("%m/%d/%Y")
     render json: project
   end
 
+  # ================================================
+  # ==  CHANGE TO DELETE EACH INDIVIDUAL PROJECT  ==
+  # ================================================
   def delete_all_complete
     # collect all projects before destroying
     projects = Project.all.select{ |project| project.done } 
