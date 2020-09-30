@@ -102,9 +102,8 @@ class UsersController < ApplicationController
   def update
     user = User.find_by(id: params[:id])
 
-    # needs work
     if user.valid? && user.projects.count == 2
-      user.update(available: false)
+      user.toggle!(:available)
       
       render json: user
     elsif user.valid? &&  user.projects.count < 2

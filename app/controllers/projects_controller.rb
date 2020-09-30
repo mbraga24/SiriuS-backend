@@ -20,48 +20,58 @@ class ProjectsController < ApplicationController
       done: false 
     )
 
-    if project.valid? 
-      users.each do |user_id|
-        user = User.find_by(id: user_id.to_i)
+    users.each do |user_id|
+      # find user by id
+      user = User.find_by(id: user_id.to_i)
+      if user.projects.count == 2
+        
         ProjectTree.create(
           user: user,
           project: project
         ) 
-
-        if user.projects.count === 3 
-          user.update(available: false)
-        end 
-
+          
+          user.toggle!(:available)
+          assignedUsers << UserSerializer.new(user)
+      else
+        ProjectTree.create(
+          user: user,
+          project: project
+        ) 
         assignedUsers << UserSerializer.new(user)
-        # byebug
       end
-
-      render json: { project: project, users: assignedUsers }, status: :created
-    else
-      render json: { error: project.errors.full_messages }, status: :bad_request
     end
+
+    render json: { project: project, users: assignedUsers }, status: :created
+
+      # elsif
+      #   render json: { error: project.errors.full_messages }, status: :bad_request
+      # end
   end
 
   def add_new_users
     # byebug
-    project = Project.find_by(id: params[:projectId])
-    params[:users].each do |u_id|
-      ProjectTree.create(
-        user_id: u_id,
-        project_id: project.id
-      )
-    end
     new_users = []
+    project = Project.find_by(id: params[:projectId])
+
     params[:users].each do |u_id|
       user = User.find_by(id: u_id)
-
-      # if user is assigned to 2 or more projects 
-      if user.projects.count >= 2
+      # if user is assigned to 2 projects make it unavailable
+      if user.projects.count == 2
+        ProjectTree.create(
+          user: user,
+          project_id: project.id
+        )
+        # toggle availability
         user.toggle!(:available)
+
         new_users << UserSerializer.new(user)
       else 
-      # if user is assigned to less than 2 projects
-        new_users << user
+        ProjectTree.create(
+          user: user,
+          project_id: project.id
+        )
+        
+        new_users << UserSerializer.new(user)
       end 
     end
 
