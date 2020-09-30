@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get '/admin/:id', to: 'users#admin'
   delete 'users/:user_id/remove-project/:project_id', to: 'users#remove_project'
 
-  resources :projects, only: [:index, :create, :show]
+  resources :projects, only: [:index, :create, :show, :destroy]
   delete '/projects/clear', to: 'projects#delete_all_complete'
   patch '/project/complete/:id', to: 'projects#complete'
   patch '/add_user/project', to: 'projects#add_new_users'

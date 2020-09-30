@@ -86,29 +86,37 @@ class ProjectsController < ApplicationController
     render json: project
   end
 
-  # ================================================
-  # ==  CHANGE TO DELETE EACH INDIVIDUAL PROJECT  ==
-  # ================================================
-  def delete_all_complete
-    # collect all projects before destroying
-    projects = Project.all.select{ |project| project.done } 
-  
-    # collect all users who are unavailable for working 3 projects
-    users = projects.collect do |project|
-      project.users.select do |user|
-        if user.available == false
-          user.toggle!(:available)
-        end
-      end
-    end[0]
-
-    # delete all projects that are true
-    Project.all.each do |project| 
-      if project.done == true 
-        project.destroy
+  def destroy
+    project = Project.find_by(id: params[:id])
+    users = project.users
+    users.each do |user|
+      if user.available == false
+        user.toggle!(:available)
       end
     end
-
-    render json: { header: "Completed projects deleted successfully", available_users: users }, status: :ok
+    render json: { header: "The project was deleted successfully", project: project, users: users }, status: :ok
   end
+
+  # def delete_all_complete
+  #   # collect all projects before destroying
+  #   projects = Project.all.select{ |project| project.done } 
+  
+  #   # collect all users who are unavailable for working 3 projects
+  #   users = projects.collect do |project|
+  #     project.users.select do |user|
+  #       if user.available == false
+  #         user.toggle!(:available)
+  #       end
+  #     end
+  #   end[0]
+
+  #   # delete all projects that are true
+  #   Project.all.each do |project| 
+  #     if project.done == true 
+  #       project.destroy
+  #     end
+  #   end
+
+  #   render json: { header: "Completed projects deleted successfully", available_users: users }, status: :ok
+  # end
 end
