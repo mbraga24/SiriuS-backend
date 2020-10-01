@@ -41,11 +41,7 @@ class ProjectsController < ApplicationController
       end
     end
 
-    render json: { project: project, users: assignedUsers }, status: :created
-
-      # elsif
-      #   render json: { error: project.errors.full_messages }, status: :bad_request
-      # end
+    render json: { project: ProjectSerializer.new(project), users: assignedUsers }, status: :created
   end
 
   def add_new_users
@@ -83,18 +79,21 @@ class ProjectsController < ApplicationController
     project.toggle!(:done)
     # set the date when the project was completed
     project[:finish_date] = Time.now.strftime("%m/%d/%Y")
-    render json: project
+    render json: {project: ProjectSerializer.new(project)}, status: :ok
   end
 
   def destroy
+    users = []
     project = Project.find_by(id: params[:id])
-    users = project.users
-    users.each do |user|
+    project_id = project.id
+    project.users.each do |user|
       if user.available == false
         user.toggle!(:available)
+        users << UserSerializer.new(user)
       end
     end
-    render json: { header: "The project was deleted successfully", project: project, users: users }, status: :ok
+    project.destroy
+    render json: { header: "The project was deleted successfully", projectId: project_id, users: users }, status: :ok
   end
 
   # def delete_all_complete
