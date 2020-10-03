@@ -155,6 +155,7 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
+    rubyzip (2.3.0)
     spring (2.1.0)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -176,6 +177,9 @@ GEM
     websocket-driver (0.7.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    wicked_pdf (2.1.0)
+      activesupport
+    wkhtmltopdf-binary (0.12.6.4)
     zeitwerk (2.4.0)
 
 PLATFORMS
@@ -194,9 +198,12 @@ DEPENDENCIES
   puma (~> 4.1)
   rack-cors
   rails (~> 6.0.3, >= 6.0.3.2)
+  rubyzip (>= 1.0.0)
   spring
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data
+  wicked_pdf
+  wkhtmltopdf-binary
 
 RUBY VERSION
    ruby 2.6.1p33

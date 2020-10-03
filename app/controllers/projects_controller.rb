@@ -40,12 +40,10 @@ class ProjectsController < ApplicationController
         assignedUsers << UserSerializer.new(user)
       end
     end
-
     render json: { project: ProjectSerializer.new(project), users: assignedUsers }, status: :created
   end
 
   def add_new_users
-    # byebug
     new_users = []
     project = Project.find_by(id: params[:projectId])
 
@@ -66,13 +64,42 @@ class ProjectsController < ApplicationController
           user: user,
           project_id: project.id
         )
-        
         new_users << UserSerializer.new(user)
       end 
+
     end
 
     render json: { users: new_users, project: ProjectSerializer.new(project) }
   end
+
+  def download_zip
+    project = Project.find_by(id: params[:id])
+      # compressed_filestream = Zip::OutputStream.write_buffer do |zos|
+      #   zos.put_next_entry "TESTING #{project.name}-#{project.id}.json"
+      #   zos.print project.to_json(only: [:name])
+      # end
+      # compressed_filestream.rewind
+      # send_data compressed_filestream.read, filename: "projects.zip"
+
+      stringio = Zip::OutputStream.write_buffer do |zio|
+        zio.put_next_entry "#{project.name}-#{project.id}.json"
+        zio.print project.to_json(only: [:name, :description])
+
+        # dec_pdf = render_to_string :pdf => "project-#{project.id}.pdf", :file => '/siri-us-frontend/components/ShowProject.js', :template => "project/done/#{project.id}", :formats => 'json', :locals => {project: project}, :layouts => false
+        dec_pdf = render_to_string :pdf => "project-#{project.id}.pdf", :url => "project/done/:id", :format => :html, :locals => {project: project}, :layouts => false
+        zio.put_next_entry("project-#{project.id}.pdf")
+        zio << dec_pdf
+      end
+      stringio.rewind
+      binary_data = stringio.sysread
+      send_data(binary_data, :type => 'application/zip', :filename => "projects.zip")
+  end
+
+  # ATTEMPTS:
+  # /download/#{project.id}
+  # "siri-us-frontend/components/ShowProject.js"
+  # "project/done/#{project.id}"
+  # "http://localhost:3001/project/done/#{project.id}"
 
   def complete
     project = Project.find_by(id: params[:id])
@@ -95,27 +122,4 @@ class ProjectsController < ApplicationController
     project.destroy
     render json: { header: "The project was deleted successfully", projectId: project_id, users: users }, status: :ok
   end
-
-  # def delete_all_complete
-  #   # collect all projects before destroying
-  #   projects = Project.all.select{ |project| project.done } 
-  
-  #   # collect all users who are unavailable for working 3 projects
-  #   users = projects.collect do |project|
-  #     project.users.select do |user|
-  #       if user.available == false
-  #         user.toggle!(:available)
-  #       end
-  #     end
-  #   end[0]
-
-  #   # delete all projects that are true
-  #   Project.all.each do |project| 
-  #     if project.done == true 
-  #       project.destroy
-  #     end
-  #   end
-
-  #   render json: { header: "Completed projects deleted successfully", available_users: users }, status: :ok
-  # end
 end
