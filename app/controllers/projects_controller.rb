@@ -84,6 +84,7 @@ class ProjectsController < ApplicationController
         zio.print "#{project[:due_date]} \n"
         zio.write "Project Closed Date: \n"
         zio.print "#{project[:finish_date]} \n"   
+        
         # create .json file with all the project's details
         zio.put_next_entry "#{project.name}-#{project.id}.json"
         zio.print project.to_json(only: [:name, :description, :start_date, :due_date, :finish_date])
