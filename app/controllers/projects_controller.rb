@@ -21,7 +21,6 @@ class ProjectsController < ApplicationController
     )
 
     users.each do |user_id|
-      # find user by id
       user = User.find_by(id: user_id.to_i)
       if user.projects.count == 2
         
@@ -29,7 +28,6 @@ class ProjectsController < ApplicationController
           user: user,
           project: project
         ) 
-          
           user.toggle!(:available)
           assignedUsers << UserSerializer.new(user)
       else
@@ -66,7 +64,6 @@ class ProjectsController < ApplicationController
         )
         new_users << UserSerializer.new(user)
       end 
-
     end
 
     render json: { users: new_users, project: ProjectSerializer.new(project) }
@@ -74,32 +71,27 @@ class ProjectsController < ApplicationController
 
   def download_zip
     project = Project.find_by(id: params[:id])
-      # compressed_filestream = Zip::OutputStream.write_buffer do |zos|
-      #   zos.put_next_entry "TESTING #{project.name}-#{project.id}.json"
-      #   zos.print project.to_json(only: [:name])
-      # end
-      # compressed_filestream.rewind
-      # send_data compressed_filestream.read, filename: "projects.zip"
-
       stringio = Zip::OutputStream.write_buffer do |zio|
+        # create text file with all the project's details
+        zio.put_next_entry "#{project.name}-#{project.id}.txt"
+        zio.write "Project Name: \n"
+        zio.print "#{project[:name]} \n"
+        zio.write "Project Description: \n"
+        zio.print "#{project[:description]} \n"
+        zio.write "Project Start Date: \n"
+        zio.print "#{project[:start_date]} \n"
+        zio.write "Project Due Date: \n"
+        zio.print "#{project[:due_date]} \n"
+        zio.write "Project Closed Date: \n"
+        zio.print "#{project[:finish_date]} \n"   
+        # create .json file with all the project's details
         zio.put_next_entry "#{project.name}-#{project.id}.json"
-        zio.print project.to_json(only: [:name, :description])
-
-        # dec_pdf = render_to_string :pdf => "project-#{project.id}.pdf", :file => '/siri-us-frontend/components/ShowProject.js', :template => "project/done/#{project.id}", :formats => 'json', :locals => {project: project}, :layouts => false
-        dec_pdf = render_to_string :pdf => "project-#{project.id}.pdf", :url => "project/done/:id", :format => :html, :locals => {project: project}, :layouts => false
-        zio.put_next_entry("project-#{project.id}.pdf")
-        zio << dec_pdf
+        zio.print project.to_json(only: [:name, :description, :start_date, :due_date, :finish_date])
       end
       stringio.rewind
       binary_data = stringio.sysread
-      send_data(binary_data, :type => 'application/zip', :filename => "projects.zip")
+      send_data(binary_data, :type => 'application/zip', :filename => "project.zip")
   end
-
-  # ATTEMPTS:
-  # /download/#{project.id}
-  # "siri-us-frontend/components/ShowProject.js"
-  # "project/done/#{project.id}"
-  # "http://localhost:3001/project/done/#{project.id}"
 
   def complete
     project = Project.find_by(id: params[:id])
