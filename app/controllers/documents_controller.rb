@@ -4,7 +4,7 @@ class DocumentsController < ApplicationController
     
     render json: documents
   end
-
+  
   def create
     img_file = Cloudinary::Uploader.upload(params[:file], "format" => 'jpg')
 
