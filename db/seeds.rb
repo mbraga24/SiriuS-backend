@@ -135,8 +135,10 @@ will = User.create(
 )
 
 document_1 = Document.create(
-  name: "Just Some Flowers",
+  # name: "Just Some Flowers",
+  name: "Company Intro",
   url: "https://res.cloudinary.com/dloh9txdc/image/upload/v1598121663/sample.jpg",
+  # url: "https://res.cloudinary.com/dloh9txdc/image/upload/v1602009325/Company_Intro_b5sxcw.pdf",
   user: andrew,
   project: project_1
 )

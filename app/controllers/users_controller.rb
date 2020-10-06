@@ -125,13 +125,18 @@ class UsersController < ApplicationController
     # delete the association between the given project and user 
     ProjectTree.find_by(user_id: user.id, project_id: project.id).destroy
 
-    # return updated user to update redux store in the frontend
-    render json: user
+    # return updated user and project to update redux store in the frontend
+    render json: { user: UserSerializer.new(user), project: ProjectSerializer.new(project) }
   end
 
   def destroy
     user = User.find_by(id: params[:id])
+    collectProjects = []
+    user.projects.each do |pro|
+      collectProjects << ProjectSerializer.new(pro)
+    end
+
     user.destroy
-    render json: user
+    render json: {user: user, projects: collectProjects}
   end
 end
