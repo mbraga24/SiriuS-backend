@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get '/download/:id', to: 'projects#download_zip'
   delete '/projects/clear', to: 'projects#delete_all_complete'
   patch '/project/complete/:id', to: 'projects#complete'
-  patch '/add_user/project', to: 'projects#add_new_users'
+  patch '/add_user/project', to: 'projects#add_users_to_project'
 
   resources :documents, only: [:index, :create]
 end

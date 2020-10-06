@@ -42,9 +42,9 @@ class ProjectsController < ApplicationController
     render json: { project: ProjectSerializer.new(project), users: assignedUsers }, status: :created
   end
 
-  def add_new_users
-    new_users = []
+  def add_users_to_project
     project = Project.find_by(id: params[:projectId])
+    new_users = []
 
     params[:users].each do |u_id|
       user = User.find_by(id: u_id)
