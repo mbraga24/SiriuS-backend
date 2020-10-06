@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   def index
-    projects = Project.all
+    projects = Project.all.order("id DESC")
     render json: projects
   end
 
@@ -17,6 +17,7 @@ class ProjectsController < ApplicationController
       description: params[:description], 
       start_date: params[:startDate], 
       due_date: params[:dueDate], 
+      finish_date: nil,
       done: false 
     )
 
@@ -99,7 +100,7 @@ class ProjectsController < ApplicationController
     project.toggle!(:done)
     # set the date when the project was completed
     project[:finish_date] = Time.now.strftime("%m/%d/%Y")
-    render json: {project: ProjectSerializer.new(project)}, status: :ok
+    render json: { project: ProjectSerializer.new(project) }, status: :ok
   end
 
   def destroy
