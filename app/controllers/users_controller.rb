@@ -45,18 +45,12 @@ class UsersController < ApplicationController
     #   # encrypt the user id ====> token = JWT.encode payload, password parameter, 'algorithm'
     #   token = JWT.encode({ user_id: user.id }, "not_too_safe", "HS256")
 
-    puts "=================================="
-    puts " ------> IF <------- "
-    puts "=================================="
-
     #   # if it validates to true renders json: user & token ====> run user explicitly through serializer
       # render json: { user: userSerializer.new(user), token: token }
       # byebug
       render json: { user: UserSerializer.new(user) }, status: :created
+      # render json: { user: user }, status: :created
     else
-      puts "=================================="
-      puts "ERRORS ---> #{user.errors.full_messages.count}"
-      puts "=================================="
 
     #   # if user is not valid - render error messages (rails validation messages) and status code
     #   render json: { header: "You need to fulfill these #{user.errors.full_messages.count} password requirements", error: user.errors.full_messages }, status: :bad_request 
