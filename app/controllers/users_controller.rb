@@ -17,7 +17,15 @@ class UsersController < ApplicationController
 
   def create 
     # create user
-    user = User.create(email: params[:email], first_name: params[:first_name], last_name: params[:last_name], company: params[:company], job_title: params[:job_title], password: params[:password])
+    user = User.create(
+      email: params[:email], 
+      first_name: params[:first_name], 
+      last_name: params[:last_name], 
+      company: params[:company], 
+      job_title: params[:job_title], 
+      available: true,
+      password: params[:password]
+    )
 
     # # if user was successfully created
     if user.valid? 
@@ -39,13 +47,12 @@ class UsersController < ApplicationController
     #   # if it validates to true renders json: user & token ====> run user explicitly through serializer
       # render json: { user: userSerializer.new(user), token: token }
       # byebug
-      render json: user, status: :created
+      render json: { user: UserSerializer.new(user) }, status: :created
     else
 
     #   # if user is not valid - render error messages (rails validation messages) and status code
     #   render json: { header: "You need to fulfill these #{user.errors.full_messages.count} password requirements", error: user.errors.full_messages }, status: :bad_request 
       render json: { header: "You need to fulfill these #{user.errors.full_messages.count} password requirements", error: user.errors.full_messages }, status: :bad_request 
-
     end
   end
 
@@ -62,7 +69,7 @@ class UsersController < ApplicationController
 
       # if it validates to true renders json: user & token ====> run user explicitly through serializer
       # render json: { user: userSerializer.new(user), token: token, header: "Welcome, #{user.first_name} #{user.last_name}!", message: [], type: "success" }
-      render json: user
+      render json: { user: UserSerializer.new(user) }
 
       # default render before authentication ====> implicitly run through serializer
       # render json: user

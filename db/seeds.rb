@@ -48,100 +48,113 @@ project_3 = Project.create(
 
 marlon = User.create(
   email: "admin@example.com",
-  password: "12345",
   first_name: "Marlon",
   last_name: "Braga",
   company: "MonkeyGang Co,. Ltd.",
   job_title: "Project Manager",
   available: true,
-  admin: true
+  admin: true,
+  password: "1L*vesalami"
 )
 
 mark = User.create(
-  email: "mark@example.com",
-  password: "12345",
+  email: "markkoslo@example.com",
   first_name: "Mark",
   last_name: "Koslo",
   company: "MonkeyGang Co,. Ltd.",
   job_title: "Sr. Software Engineer",
   available: false,
-  admin: false
+  admin: false,
+  password: "1L*vesalami"
 )
 
 franklin = User.create(
   email: "franklin@example.com",
-  password: "12345",
   first_name: "Franklin",
   last_name: "Badu",
   company: "MonkeyGang Co,. Ltd.",
   job_title: "Jr. Software Engineer",
   available: false,
-  admin: false
+  admin: false,
+  password: "1L*vesalami"
 )
 
 marcelo = User.create(
   email: "marcelo@example.com",
-  password: "12345",
   first_name: "Marcelo",
   last_name: "Souza",
   job_title: "Sr. Software Engineer",
   company: "MonkeyGang Co,. Ltd.",
   available: false,
-  admin: false
+  admin: false,
+  password: "1L*vesalami"
 )
 
 andrew = User.create(
   email: "andrew@example.com",
-  password: "12345",
   first_name: "Andrew",
   last_name: "Cataluna",
   job_title: "Data Analist",
   company: "MonkeyGang Co,. Ltd.",
   available: false,
-  admin: false
+  admin: false,
+  password: "1L*vesalami"
 )
 
 daniel = User.create(
   email: "daniel@example.com",
-  password: "12345",
   first_name: "Daniel",
   last_name: "Costa",
   job_title: "UX Designer",
   company: "MonkeyGang Co,. Ltd.",
   available: false,
-  admin: false
+  admin: false,
+  password: "1L*vesalami"
 )
 
 john = User.create(
-  email: "john@example.com",
-  password: "12345",
-  first_name: "John",
+  email: "johnathan@example.com",
+  first_name: "Johnathan",
   last_name: "Kesviwich",
   job_title: "UI Designer",
   company: "MonkeyGang Co,. Ltd.",
   available: false,
-  admin: false
+  admin: false,
+  password: "1L*vesalami"
 )
 
 will = User.create(
-  email: "will@example.com",
-  password: "12345",
+  email: "william@example.com",
   first_name: "William",
   last_name: "Scott",
   job_title: "UX Designer",
   company: "MonkeyGang Co,. Ltd.",
   available: false,
-  admin: false
+  admin: false,
+  password: "1L*vesalami"
 )
 
+# name: "Just Some Flowers",
+# url: "https://res.cloudinary.com/dloh9txdc/image/upload/v1602009325/Company_Intro_b5sxcw.pdf",
+
 document_1 = Document.create(
-  # name: "Just Some Flowers",
   name: "Company Intro",
   url: "https://res.cloudinary.com/dloh9txdc/image/upload/v1598121663/sample.jpg",
-  # url: "https://res.cloudinary.com/dloh9txdc/image/upload/v1602009325/Company_Intro_b5sxcw.pdf",
   user: andrew,
   project: project_1
 )
+
+ALLOW_USERS = User.all.find_all do |user|
+  (user.email != 'william@example.com') && (user.email != 'johnathan@example.com') && (user.email != "admin@example.com")
+end
+
+def random_users 
+  user_collection = []
+  ALLOW_USERS.each do |u|
+    [*0..1].sample == 1 ? user_collection << u : nil
+  end
+  return user_collection
+end
 
 def checkProjectCount(user, assign_project)
   if user.projects.count < 3 
@@ -152,18 +165,6 @@ def checkProjectCount(user, assign_project)
   else
     return nil
   end
-end
-
-ALLOW_USERS = User.all.find_all do |user|
-  user.email != 'will@example.com' && user.email != 'john@example.com' && user.email != "admin@example.com"
-end
-
-def random_users 
-  user_collection = []
-  ALLOW_USERS.each do |u|
-    [*0..1].sample == 1 ? user_collection << u : nil
-  end
-  return user_collection
 end
 
 random_users().each do |user|
@@ -177,14 +178,6 @@ end
 random_users().each do |user|
   checkProjectCount(user, project_3)
 end
-
-# random_users().each do |user|
-#   checkProjectCount(user, project_4)
-# end
-
-# random_users().each do |user|
-#   checkProjectCount(user, project_5)
-# end
 
 Project.all.each do |pro|
   ProjectTree.create(
@@ -201,16 +194,15 @@ Project.all.each do |pro|
 end
 
 User.all.each do |user| 
-  if user.projects.count < 3 &&
-    toggle_user = User.find_by(id: user.id)
-    toggle_user.update(available: true)
+  if user.projects.count < 3 && user.email != "admin@example.com"
+    toggle_user = User.find_by(id: user[:id]) 
+    toggle_user.toggle!(:available)
   end
 end
-
-# puts "#{random_users().count}"
-# puts "#{ProjectTree.count} associations created for ProjectTree"
-# puts "#{allow_users}"
-# puts "#{User.all}"
+puts "#{User.all.count} users created"
+puts "#{Project.all.count} projects created"
+puts "#{ProjectTree.all.count} user->project (ProjectTree) created"
+puts "#{Document.all.count} Documents created"
 
 puts "============================"
 puts "          SEEDED"
