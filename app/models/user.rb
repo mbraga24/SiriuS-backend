@@ -25,8 +25,6 @@ class User < ApplicationRecord
     validate :password_special_char
     validate :password_contains_number            
   
-    private
-  
     def password_lower_case
       return if !!password.match(/\p{Lower}/)
       errors.add :password, ' must contain at least 1 lowercase '

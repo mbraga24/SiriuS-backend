@@ -22,11 +22,11 @@ class UsersController < ApplicationController
       email: params[:email], 
       first_name: params[:first_name], 
       last_name: params[:last_name], 
-      company: params[:company], 
+      company: User.first[:company], 
       job_title: params[:job_title], 
       available: true,
       admin: false,
-      password: params[:chosen_password]
+      password: params[:password]
     )
     # # if user was successfully created
     if user.valid? 
