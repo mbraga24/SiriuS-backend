@@ -140,12 +140,19 @@ class UsersController < ApplicationController
 
   def destroy
     user = User.find_by(id: params[:id])
+
     collectProjects = []
+    collectDocuments = []
+
     user.projects.each do |pro|
       collectProjects << ProjectSerializer.new(pro)
     end
 
+    user.documents.each do |doc|
+      collectDocuments << DocumentSerializer.new(doc)
+    end
+
     user.destroy
-    render json: {user: user, projects: collectProjects}
+    render json: { user: UserSerializer.new(user), projects: collectProjects, documents: collectDocuments }
   end
 end

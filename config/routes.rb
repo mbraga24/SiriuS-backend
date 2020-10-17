@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :users, only: [:index, :show, :destroy]
+
   post '/signup', to: 'users#create'
   post '/login', to: 'users#login'
   get '/autologin/:id', to: 'users#autologin'

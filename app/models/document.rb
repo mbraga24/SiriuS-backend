@@ -1,5 +1,4 @@
 class Document < ApplicationRecord
-  # mount_uploader :url, FileUploader
   belongs_to :project
   belongs_to :user
 

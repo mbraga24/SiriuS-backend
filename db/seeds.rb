@@ -3,6 +3,10 @@ Project.destroy_all
 Document.destroy_all
 User.destroy_all
 
+# ========================================================================
+#                             CREATE PROJECTS
+# ========================================================================
+
 project_1 = Project.create(
   name: "Riviera SaaS website",
   description: "This is a new account and a very important client. The team will be respossible for X and Y and we will be holding morning stand-up meetings for about 10-15 minutes to discuss our daily goals. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me any time of the day: (333)-444-9009",
@@ -30,21 +34,9 @@ project_3 = Project.create(
   done: false
 )
 
-# project_4 = Project.create(
-#   name: "Finish Resume",
-#   description: "This is a new account and a very important client. The team will be respossible for X and Y and we will be holding morning stand-up meetings for about 10-15 minutes to discuss our daily goals. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me any time of the day: (333)-444-9009",
-#   start_date: "08-21-2020",
-#   due_date: "09-20-2020",
-#   done: false
-# )
-
-# project_5 = Project.create(
-#   name: "Finish editing projects",
-#   description: "This is a new account and a very important client. The team will be respossible for X and Y and we will be holding morning stand-up meetings for about 10-15 minutes to discuss our daily goals. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me any time of the day: (333)-444-9009",
-#   start_date: "08-21-2020",
-#   due_date: "09-20-2020",
-#   done: false
-# )
+# ========================================================================
+#                             CREATE USERS
+# ========================================================================
 
 marlon = User.create(
   email: "admin@example.com",
@@ -96,7 +88,7 @@ andrew = User.create(
   last_name: "Cataluna",
   job_title: "Data Analist",
   company: "MonkeyGang Co,. Ltd.",
-  available: false,
+  available: true,
   admin: false,
   password: "1L*vesalami"
 )
@@ -134,8 +126,16 @@ will = User.create(
   password: "1L*vesalami"
 )
 
+# ========================================================================
+#           CUSTOM USER/PROJECT/DOCUMENT CREATION FOR TESTING
+# ========================================================================
 # name: "Just Some Flowers",
 # url: "https://res.cloudinary.com/dloh9txdc/image/upload/v1602009325/Company_Intro_b5sxcw.pdf",
+
+ProjectTree.create(
+    user: andrew,
+    project: project_1
+  )
 
 document_1 = Document.create(
   name: "Company Intro",
@@ -144,8 +144,12 @@ document_1 = Document.create(
   project: project_1
 )
 
+# ========================================================================
+#                       SET UP CUSTOM ASSOCIATIONS
+# ========================================================================
+
 ALLOW_USERS = User.all.find_all do |user|
-  (user.email != 'william@example.com') && (user.email != 'johnathan@example.com') && (user.email != "admin@example.com")
+  (user.email != 'william@example.com') && (user.email != 'johnathan@example.com') && (user.email != 'admin@example.com') && (user.email != 'andrew@example.com')
 end
 
 def random_users 
