@@ -8,7 +8,7 @@ User.destroy_all
 # ========================================================================
 
 project_1 = Project.create(
-  name: "Riviera SaaS website",
+  name: "Rivver SaaS website",
   description: "This is a new account and a very important client. The team will be respossible for X and Y and we will be holding morning stand-up meetings for about 10-15 minutes to discuss our daily goals. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me any time of the day: (333)-444-9009",
   start_date: "08-25-2020",
   due_date: "09-20-2020",
@@ -17,7 +17,7 @@ project_1 = Project.create(
 )
 
 project_2 = Project.create(
-  name: "Riviera SaaS mobile app",
+  name: "Rivver SaaS mobile app",
   description: "This is a new account and a very important client. The team will be respossible for X and Y and we will be holding morning stand-up meetings for about 10-15 minutes to discuss our daily goals. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me any time of the day: (333)-444-9009",
   start_date: "08-27-2020",
   due_date: "09-20-2020",
@@ -26,7 +26,7 @@ project_2 = Project.create(
 )
 
 project_3 = Project.create(
-  name: "Riviera SaaS Website Menu",
+  name: "Rivver SaaS Website Menu",
   description: "This is a new account and a very important client. The team will be respossible for X and Y and we will be holding morning stand-up meetings for about 10-15 minutes to discuss our daily goals. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me any time of the day: (333)-444-9009",
   start_date: "08-21-2020",
   due_date: "09-20-2020",
@@ -42,7 +42,7 @@ marlon = User.create(
   email: "admin@example.com",
   first_name: "Marlon",
   last_name: "Braga",
-  company: "MonkeyGang Co,. Ltd.",
+  company: "HangingMonkey Co,. Ltd.",
   job_title: "Project Manager",
   available: true,
   admin: true,
@@ -53,7 +53,7 @@ mark = User.create(
   email: "markkoslo@example.com",
   first_name: "Mark",
   last_name: "Koslo",
-  company: "MonkeyGang Co,. Ltd.",
+  company: marlon.company,
   job_title: "Sr. Software Engineer",
   available: false,
   admin: false,
@@ -64,7 +64,7 @@ franklin = User.create(
   email: "franklin@example.com",
   first_name: "Franklin",
   last_name: "Badu",
-  company: "MonkeyGang Co,. Ltd.",
+  company: marlon.company,
   job_title: "Jr. Software Engineer",
   available: false,
   admin: false,
@@ -76,7 +76,7 @@ marcelo = User.create(
   first_name: "Marcelo",
   last_name: "Souza",
   job_title: "Sr. Software Engineer",
-  company: "MonkeyGang Co,. Ltd.",
+  company: marlon.company,
   available: false,
   admin: false,
   password: "1L*vesalami"
@@ -87,7 +87,7 @@ andrew = User.create(
   first_name: "Andrew",
   last_name: "Cataluna",
   job_title: "Data Analist",
-  company: "MonkeyGang Co,. Ltd.",
+  company: marlon.company,
   available: true,
   admin: false,
   password: "1L*vesalami"
@@ -98,7 +98,7 @@ daniel = User.create(
   first_name: "Daniel",
   last_name: "Costa",
   job_title: "UX Designer",
-  company: "MonkeyGang Co,. Ltd.",
+  company: marlon.company,
   available: false,
   admin: false,
   password: "1L*vesalami"
@@ -109,7 +109,7 @@ john = User.create(
   first_name: "Johnathan",
   last_name: "Kesviwich",
   job_title: "UI Designer",
-  company: "MonkeyGang Co,. Ltd.",
+  company: marlon.company,
   available: false,
   admin: false,
   password: "1L*vesalami"
@@ -120,7 +120,7 @@ will = User.create(
   first_name: "William",
   last_name: "Scott",
   job_title: "UX Designer",
-  company: "MonkeyGang Co,. Ltd.",
+  company: marlon.company,
   available: false,
   admin: false,
   password: "1L*vesalami"
@@ -129,19 +129,38 @@ will = User.create(
 # ========================================================================
 #           CUSTOM USER/PROJECT/DOCUMENT CREATION FOR TESTING
 # ========================================================================
-# name: "Just Some Flowers",
-# url: "https://res.cloudinary.com/dloh9txdc/image/upload/v1602009325/Company_Intro_b5sxcw.pdf",
 
 ProjectTree.create(
     user: andrew,
     project: project_1
-  )
+)
 
 document_1 = Document.create(
-  name: "Company Intro",
-  url: "https://res.cloudinary.com/dloh9txdc/image/upload/v1598121663/sample.jpg",
+  name: "Company Mission",
+  url: "https://res.cloudinary.com/dloh9txdc/image/upload/v1602973351/bajevhecs678btugbaeg.jpg",
+  user: marlon,
+  project: project_1
+)
+
+document_2 = Document.create(
+  name: "Project Requirements",
+  url: "https://res.cloudinary.com/dloh9txdc/image/upload/v1602972500/sykvc6xbewygrurrazdh.jpg",
   user: andrew,
   project: project_1
+)
+
+document_3 = Document.create(
+  name: "Project Requirements",
+  url: "https://res.cloudinary.com/dloh9txdc/image/upload/v1602972500/sykvc6xbewygrurrazdh.jpg",
+  user: marlon,
+  project: project_2
+)
+
+document_4 = Document.create(
+  name: "Project Requirements",
+  url: "https://res.cloudinary.com/dloh9txdc/image/upload/v1602972500/sykvc6xbewygrurrazdh.jpg",
+  user: marlon,
+  project: project_3
 )
 
 # ========================================================================
