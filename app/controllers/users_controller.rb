@@ -10,13 +10,7 @@ class UsersController < ApplicationController
     render json: user
   end
 
-  def admin
-    user = User.find_by(id: params[:id])
-    render json: { user: userSerializer.new(user) }
-  end
-
   def create 
-    # byebug
     # create user
     user = User.create(
       email: params[:email], 

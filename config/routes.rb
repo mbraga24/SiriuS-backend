@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   post '/signup', to: 'users#create'
   post '/login', to: 'users#login'
   get '/autologin/:id', to: 'users#autologin'
-  get '/admin/:id', to: 'users#admin'
   delete 'users/:user_id/remove-project/:project_id', to: 'users#remove_project'
 
   resources :projects, only: [:index, :create, :show, :destroy]
