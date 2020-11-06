@@ -10,8 +10,8 @@ User.destroy_all
 project_1 = Project.create(
   name: "Rivver SaaS website",
   description: "This is a new account and a very important client. The team will be respossible for X and Y and we will be holding morning stand-up meetings for about 10-15 minutes to discuss our daily goals. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me any time of the day: (333)-444-9009",
-  start_date: "08-25-2020",
-  due_date: "09-20-2020",
+  start_date: "08/25/2020",
+  due_date: "09/20/2020",
   finish_date: nil,
   done: false
 )
@@ -19,8 +19,8 @@ project_1 = Project.create(
 project_2 = Project.create(
   name: "Rivver SaaS mobile app",
   description: "This is a new account and a very important client. The team will be respossible for X and Y and we will be holding morning stand-up meetings for about 10-15 minutes to discuss our daily goals. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me any time of the day: (333)-444-9009",
-  start_date: "08-27-2020",
-  due_date: "09-20-2020",
+  start_date: "08/27/2020",
+  due_date: "09/20/2020",
   finish_date: Time.now.strftime("%m/%d/%Y"),
   done: true
 )
@@ -28,8 +28,8 @@ project_2 = Project.create(
 project_3 = Project.create(
   name: "Rivver SaaS Website Menu",
   description: "This is a new account and a very important client. The team will be respossible for X and Y and we will be holding morning stand-up meetings for about 10-15 minutes to discuss our daily goals. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me any time of the day: (333)-444-9009",
-  start_date: "08-21-2020",
-  due_date: "09-20-2020",
+  start_date: "08/21/2020",
+  due_date: "09/20/2020",
   finish_date: nil,
   done: false
 )
@@ -88,7 +88,7 @@ andrew = User.create(
   last_name: "Cataluna",
   job_title: "Data Analist",
   company: marlon.company,
-  available: true,
+  available: false,
   admin: false,
   password: "1L*vesalami"
 )
@@ -127,44 +127,7 @@ will = User.create(
 )
 
 # ========================================================================
-#           CUSTOM USER/PROJECT/DOCUMENT CREATION FOR TESTING
-# ========================================================================
-
-ProjectTree.create(
-    user: andrew,
-    project: project_1
-)
-
-document_1 = Document.create(
-  name: "Company Mission",
-  url: "https://res.cloudinary.com/dloh9txdc/image/upload/v1602973351/bajevhecs678btugbaeg.jpg",
-  user: marlon,
-  project: project_1
-)
-
-document_2 = Document.create(
-  name: "Project Requirements",
-  url: "https://res.cloudinary.com/dloh9txdc/image/upload/v1602972500/sykvc6xbewygrurrazdh.jpg",
-  user: andrew,
-  project: project_1
-)
-
-document_3 = Document.create(
-  name: "Project Requirements",
-  url: "https://res.cloudinary.com/dloh9txdc/image/upload/v1602972500/sykvc6xbewygrurrazdh.jpg",
-  user: marlon,
-  project: project_2
-)
-
-document_4 = Document.create(
-  name: "Project Requirements",
-  url: "https://res.cloudinary.com/dloh9txdc/image/upload/v1602972500/sykvc6xbewygrurrazdh.jpg",
-  user: marlon,
-  project: project_3
-)
-
-# ========================================================================
-#                       SET UP CUSTOM ASSOCIATIONS
+#                       SET UP MASSIVE ASSOCIATIONS
 # ========================================================================
 
 ALLOW_USERS = User.all.find_all do |user|
@@ -179,7 +142,7 @@ def random_users
   return user_collection
 end
 
-def checkProjectCount(user, assign_project)
+def check_project_count_and_create(user, assign_project)
   if user.projects.count < 3 
     ProjectTree.create(
       user: user,
@@ -191,16 +154,20 @@ def checkProjectCount(user, assign_project)
 end
 
 random_users().each do |user|
-  checkProjectCount(user, project_1)
+  check_project_count_and_create(user, project_1)
 end
 
 random_users().each do |user|
-  checkProjectCount(user, project_2)
+  check_project_count_and_create(user, project_2)
 end
 
 random_users().each do |user|
-  checkProjectCount(user, project_3)
+  check_project_count_and_create(user, project_3)
 end
+
+# ========================================================================
+#     CREATE CUSTOM PROJECT ASSOCIATION FOR >JOHNATHAN< AND >WILLIAM<
+# ========================================================================
 
 Project.all.each do |pro|
   ProjectTree.create(
@@ -216,12 +183,51 @@ Project.all.each do |pro|
   )
 end
 
+# ========================================================================
+#           CUSTOM USER/PROJECT/DOCUMENT CREATION FOR TESTING
+# ========================================================================
+
+ProjectTree.create(
+    user: andrew,
+    project: project_1
+)
+
+document_1 = Document.create(
+  name: "Company Mission",
+  url: "https://res.cloudinary.com/dloh9txdc/image/upload/v1604597369/Company_Mission_-_Demo_qdz8ym.pdf",
+  user: marlon,
+  project: project_1
+)
+
+document_2 = Document.create(
+  name: "Project Requirements",
+  url: "https://res.cloudinary.com/dloh9txdc/image/upload/v1604597179/Project_Requirements_-_Demo_zwe3qu.pdf",
+  user: andrew,
+  project: project_1
+)
+
+document_3 = Document.create(
+  name: "Project Requirements",
+  url: "https://res.cloudinary.com/dloh9txdc/image/upload/v1604597179/Project_Requirements_-_Demo_zwe3qu.pdf",
+  user: marlon,
+  project: project_2
+)
+
+document_4 = Document.create(
+  name: "Project Requirements",
+  url: "https://res.cloudinary.com/dloh9txdc/image/upload/v1604597179/Project_Requirements_-_Demo_zwe3qu.pdf",
+  user: marlon,
+  project: project_3
+)
+
+
 User.all.each do |user| 
   if user.projects.count < 3 && user.email != "admin@example.com"
     toggle_user = User.find_by(id: user[:id]) 
     toggle_user.toggle!(:available)
   end
 end
+
 puts "#{User.all.count} users created"
 puts "#{Project.all.count} projects created"
 puts "#{ProjectTree.all.count} user->project (ProjectTree) created"

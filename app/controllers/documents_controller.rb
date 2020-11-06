@@ -6,9 +6,9 @@ class DocumentsController < ApplicationController
   end
   
   def create
-    img_file = Cloudinary::Uploader.upload(params[:file], "format" => 'jpg')
+    pdf_file = Cloudinary::Uploader.upload(params[:file], :pages => true)
 
-    document = Document.create(name: params[:fileName], url: img_file["url"], project_id: params[:projectId], user_id: params[:userId])
+    document = Document.create(name: params[:fileName], url: pdf_file["url"], project_id: params[:projectId], user_id: params[:userId])
     render json: document
   end
 end
