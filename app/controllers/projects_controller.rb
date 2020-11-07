@@ -92,7 +92,7 @@ class ProjectsController < ApplicationController
       end
       stringio.rewind
       binary_data = stringio.sysread
-      send_data(binary_data, :type => 'application/zip', :filename => "project.zip")
+      send_data(binary_data, :type => 'application/zip', :filename => "Project-#{project.name}.zip")
   end
 
   def complete
