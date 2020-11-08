@@ -11,8 +11,8 @@ class UsersController < ApplicationController
   end
 
   def create 
-    # create user
-    user = User.create(
+    # byebug
+    @user = User.create(
       email: params[:email], 
       first_name: params[:first_name], 
       last_name: params[:last_name], 
@@ -22,8 +22,8 @@ class UsersController < ApplicationController
       admin: false,
       password: params[:password]
     )
-    # # if user was successfully created
-    if user.valid? 
+
+    if @user.save
     
     #    # if user is valid collect skills from params
     #   top_skills = Skill.all.find_all { |skill| params[:topSkills].include?(skill[:text]) }
@@ -42,13 +42,20 @@ class UsersController < ApplicationController
     #   # if it validates to true renders json: user & token ====> run user explicitly through serializer
       # render json: { user: userSerializer.new(user), token: token }
       # byebug
-      render json: { user: UserSerializer.new(user) }, status: :created
+      UserNotifierMailer.send_signup_email(@user).deliver
+      render json: { user: UserSerializer.new(@user) }, status: :created
       # render json: { user: user }, status: :created
     else
-
+      # byebug
+      # if params[:password] == ""
+      #   user.errors.full_messages.push("Password can't be blank")
+      # end
+      # puts "=================="
+      # puts "=================="
+      # puts "#{user.errors.full_messages}"
     #   # if user is not valid - render error messages (rails validation messages) and status code
     #   render json: { header: "You need to fulfill these #{user.errors.full_messages.count} password requirements", error: user.errors.full_messages }, status: :bad_request 
-      render json: { header: "You need to fulfill these #{user.errors.full_messages.count} password requirements", error: user.errors.full_messages }, status: :bad_request 
+      render json: { header: "You need to fulfill these #{@user.errors.full_messages.count} password requirements", error: @user.errors.full_messages }, status: :bad_request 
     end
   end
 
