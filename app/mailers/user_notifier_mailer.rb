@@ -6,4 +6,9 @@ class UserNotifierMailer < ApplicationMailer
     @user = user
     mail( :to => @user.email, :subject => "Thank you for getting SiriuS today!" )
   end
+
+  def send_invitation_email(user)
+    @user = user
+    mail( :to => @user.email, :subject => "You have an invitation! Time to get SiriuS." )
+  end
 end

@@ -10,6 +10,10 @@ class UsersController < ApplicationController
     render json: user
   end
 
+  def invite
+    byebug
+  end
+
   def create 
     # byebug
     @user = User.create(

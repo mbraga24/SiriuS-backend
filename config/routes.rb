@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   post '/signup', to: 'users#create'
   post '/login', to: 'users#login'
+  post '/invite-user', to: 'users#invite'
   get '/autologin/:id', to: 'users#autologin'
   delete 'users/:user_id/remove-project/:project_id', to: 'users#remove_project'
 
