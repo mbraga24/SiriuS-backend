@@ -4,7 +4,10 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h2>Thank you for signing up to SiriuS, <%= @user.first_name %>!</h2>
-    <p>Log in and join your new team and start collaborating today.</p>
+    <h2>Welcome to the team of SiriuS collaborators, <%= "#{@user.first_name}" %>!</h2>
+    <h3>Join your new team and start collaborating today.</h3>
+    <br/>
+    <p>Best Regards,</p>
+    <p><%= "#{ @admin.first_name @admin.last_name }" %></p>
   </body>
 </html>

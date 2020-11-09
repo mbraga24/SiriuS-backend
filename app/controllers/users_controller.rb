@@ -10,10 +10,6 @@ class UsersController < ApplicationController
     render json: user
   end
 
-  def invite
-    byebug
-  end
-
   def create 
     # byebug
     @user = User.create(
@@ -46,7 +42,9 @@ class UsersController < ApplicationController
     #   # if it validates to true renders json: user & token ====> run user explicitly through serializer
       # render json: { user: userSerializer.new(user), token: token }
       # byebug
-      UserNotifierMailer.send_signup_email(@user).deliver
+      @admin = User.first
+      UserNotifierMailer.send_signup_email(@user, @admin).deliver
+
       render json: { user: UserSerializer.new(@user) }, status: :created
       # render json: { user: user }, status: :created
     else
