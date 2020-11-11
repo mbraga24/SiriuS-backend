@@ -6,6 +6,6 @@ class Invite < ApplicationRecord
 
   def generate_token
     # byebug
-    self.token = Digest::SHA1.hexdigest([self.id * 666, Time.now, rand].join)
+    self.token = Digest::SHA1.hexdigest([self.id, Time.now, rand].join)
   end
 end
