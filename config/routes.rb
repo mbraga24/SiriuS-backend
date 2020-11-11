@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   resources :users, only: [:index, :show, :destroy]
-
+  resources :invites 
+  
   post '/signup', to: 'users#create'
   post '/login', to: 'users#login'
-  post '/send-invitation', to: 'users#invite'
   get '/autologin/:id', to: 'users#autologin'
   delete 'users/:user_id/remove-project/:project_id', to: 'users#remove_project'
 

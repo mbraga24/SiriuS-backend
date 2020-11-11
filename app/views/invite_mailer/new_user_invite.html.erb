@@ -1,0 +1,8 @@
+<% if @invite.custom_invitation != nil %>
+  <p>@invite.custom_invitation<p>
+  <h4>Sign up and let's get SiriuS <%= @link %></h4>
+<% else %>
+  <h3>Hello <%= "#{@invite.first_name @invite.last_name},"%></h3>
+  <p>It's time to roll up your sleeves <%= @invite.first_name %>. <%= @invite.company %> needs your expertise!</p>
+  <h4> Come join our team! Sign up and let's get SiriuS <%= @link %></h4>
+<% else %>
