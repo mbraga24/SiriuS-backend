@@ -42,7 +42,7 @@ marlon = User.create(
   email: "admin@example.com",
   first_name: "Marlon",
   last_name: "Braga",
-  company: "HangingMonkey Co,. Ltd.",
+  company: "Design Monkey",
   job_title: "Project Manager",
   available: true,
   admin: true,
