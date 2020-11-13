@@ -11,7 +11,7 @@ class Invite < ApplicationRecord
 
   validates :email,
             presence: true,
-            length: { maximum: 25 },
+            length: { maximum: 45 },
             format: { with: VALID_EMAIL_FORMAT }
 
   def generate_token

@@ -23,6 +23,10 @@ class User < ApplicationRecord
     validates :password,
               presence: true, # <= does not work with custom validations - read more at the bottom
               length: { minimum: 6, maximum: 255 }
+
+    validates :job_title,
+              presence: true,
+              length: { minimum: 6, maximum: 255 }
   
     # validate :password_lower_case
     # validate :password_uppercase

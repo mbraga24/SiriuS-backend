@@ -12,52 +12,41 @@ class UsersController < ApplicationController
 
   def create 
     # byebug
-    @user = User.create(
-      email: params[:email], 
-      first_name: params[:first_name], 
-      last_name: params[:last_name], 
-      company: User.first[:company], 
-      job_title: params[:job_title], 
-      available: true,
-      admin: false,
-      password: params[:password]
-    )
-
-    if @user.save
     
-    #    # if user is valid collect skills from params
-    #   top_skills = Skill.all.find_all { |skill| params[:topSkills].include?(skill[:text]) }
-
-    #   # if user is valid create association between new user and skills
-    #   top_skills.each do |topSkill|
-    #     UserSkill.create(
-    #       user: user,
-    #       skill: topSkill
-    #     )
-      # end
-
-    #   # encrypt the user id ====> token = JWT.encode payload, password parameter, 'algorithm'
-    #   token = JWT.encode({ user_id: user.id }, "not_too_safe", "HS256")
-
-    #   # if it validates to true renders json: user & token ====> run user explicitly through serializer
-      # render json: { user: userSerializer.new(user), token: token }
+    # if invite_token exists create user 
+    if user_invite_token[:invite_token] && Invite.find_by(token: user_invite_token[:invite_token]).present?
+      
+      invite = Invite.find_by(token: user_invite_token[:invite_token])
+      @admin = invite.sender
+      @user = User.new(user_params)
+      @user.company = @admin.company
       # byebug
-      @admin = User.first
-      UserNotifierMailer.send_signup_email(@user, @admin).deliver
 
-      render json: { user: UserSerializer.new(@user) }, status: :created
-      # render json: { user: user }, status: :created
+      if @user.valid? 
+        @user.save
+        #   # encrypt the user id ====> token = JWT.encode payload, password parameter, 'algorithm'
+        #   token = JWT.encode({ user_id: user.id }, "not_too_safe", "HS256")
+    
+          # if it validates to true renders json: user & token ====> run user explicitly through serializer
+          # render json: { user: userSerializer.new(user), token: token }
+          UserNotifierMailer.send_signup_email(@user, @admin).deliver
+          # destroy invitation once user was created
+          invite.destroy
+          render json: { user: UserSerializer.new(@user), invite: InviteSerializer.new(invite) }, status: :created
+      else
+        # byebug
+        # if params[:password] == ""
+        #   user.errors.full_messages.push("Password can't be blank")
+        # end
+        # puts "=================="
+        # puts "=================="
+        # puts "#{user.errors.full_messages}"
+      #   # if user is not valid - render error messages (rails validation messages) and status code
+      #  render json: { header: "You need to fulfill these #{user.errors.full_messages.count} password requirements", error: user.errors.full_messages }, status: :bad_request 
+        render json: { header: "You need to fulfill these #{@user.errors.full_messages.count} password requirements", error: @user.errors.full_messages }, status: :bad_request 
+      end
     else
-      # byebug
-      # if params[:password] == ""
-      #   user.errors.full_messages.push("Password can't be blank")
-      # end
-      # puts "=================="
-      # puts "=================="
-      # puts "#{user.errors.full_messages}"
-    #   # if user is not valid - render error messages (rails validation messages) and status code
-    #   render json: { header: "You need to fulfill these #{user.errors.full_messages.count} password requirements", error: user.errors.full_messages }, status: :bad_request 
-      render json: { header: "You need to fulfill these #{@user.errors.full_messages.count} password requirements", error: @user.errors.full_messages }, status: :bad_request 
+      # else create new admin
     end
   end
 
@@ -158,4 +147,13 @@ class UsersController < ApplicationController
     user.destroy
     render json: { user: UserSerializer.new(user), projects: collectProjects, documents: collectDocuments }
   end
+
+  private
+    def user_params
+      params.require(:user).permit(:email, :first_name, :last_name, :job_title, :password)
+    end
+
+    def user_invite_token
+      params.require(:user).permit(:invite_token)
+    end
 end
