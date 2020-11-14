@@ -52,7 +52,7 @@ class UsersController < ApplicationController
     # byebug
     # find user by email
     user = User.find_by(email: params[:email])
-
+    # byebug
     # validates user and password (authentication)
     if user && user.authenticate(params[:password])
       # byebug
@@ -83,7 +83,7 @@ class UsersController < ApplicationController
 
   # # find user by id 
   # # user = user.find_by(id: user_id)
-  # user = User.find_by(id: params[:id])
+    user = User.find_by(id: params[:id])
 
     if user
       render json: user
@@ -148,7 +148,7 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:email, :first_name, :last_name, :job_title, :password)
     end
-    
+
     def user_admin_params
       params.require(:user).permit(:email, :first_name, :last_name, :job_title, :company, :password)
     end
