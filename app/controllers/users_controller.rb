@@ -11,8 +11,6 @@ class UsersController < ApplicationController
   end
 
   def create 
-    # byebug
-    
     # if invite_token exists create user 
     if user_invite_token[:invite_token] && Invite.find_by(token: user_invite_token[:invite_token]).present?
       
@@ -20,12 +18,11 @@ class UsersController < ApplicationController
       @admin = invite.sender
       @user = User.new(user_params)
       @user.company = @admin.company
-      # byebug
 
       if @user.valid? 
         @user.save
-        #   # encrypt the user id ====> token = JWT.encode payload, password parameter, 'algorithm'
-        #   token = JWT.encode({ user_id: user.id }, "not_too_safe", "HS256")
+          # encrypt the user id ====> token = JWT.encode payload, password parameter, 'algorithm'
+          # token = JWT.encode({ user_id: user.id }, "not_too_safe", "HS256")
     
           # if it validates to true renders json: user & token ====> run user explicitly through serializer
           # render json: { user: userSerializer.new(user), token: token }
@@ -35,18 +32,19 @@ class UsersController < ApplicationController
           render json: { user: UserSerializer.new(@user), invite: InviteSerializer.new(invite) }, status: :created
       else
         # byebug
-        # if params[:password] == ""
-        #   user.errors.full_messages.push("Password can't be blank")
-        # end
-        # puts "=================="
-        # puts "=================="
-        # puts "#{user.errors.full_messages}"
-      #   # if user is not valid - render error messages (rails validation messages) and status code
-      #  render json: { header: "You need to fulfill these #{user.errors.full_messages.count} password requirements", error: user.errors.full_messages }, status: :bad_request 
         render json: { header: "You need to fulfill these #{@user.errors.full_messages.count} password requirements", error: @user.errors.full_messages }, status: :bad_request 
       end
     else
       # else create new admin
+      @admin = User.new(user_admin_params)
+      @admin.admin = true
+      if @admin.save 
+        # UserNotifierMailer.send_signup_email(@admin).deliver
+        render json: { user: UserSerializer.new(@admin) }, status: :created
+
+      else  
+        render json: { header: "You need to fulfill these #{@admin.errors.full_messages.count} password requirements", error: @admin.errors.full_messages }, status: :bad_request 
+      end
     end
   end
 
@@ -64,38 +62,32 @@ class UsersController < ApplicationController
       # if it validates to true renders json: user & token ====> run user explicitly through serializer
       # render json: { user: userSerializer.new(user), token: token, header: "Welcome, #{user.first_name} #{user.last_name}!", message: [], type: "success" }
       render json: { user: UserSerializer.new(user) }
-
-      # default render before authentication ====> implicitly run through serializer
-      # render json: user
     else
-      # if user is not valid send error message and status
       render json: { header: "Uh-oh! Invalid email or password", message: [], type: "error" }, status: :unauthorized
     end
   end
 
   def autologin
-      # byebug
-  #   # extract the auth header
-  #   auth_header = request.headers['Authorization']
+  # byebug
+  # # extract the auth header
+  # auth_header = request.headers['Authorization']
 
-  #   # split the string and get the encrypted token we need
-  #   token = auth_header.split(" ")[1]
+  # # split the string and get the encrypted token we need
+  # token = auth_header.split(" ")[1]
 
-  #   # decode token with JWT library
-  #   decoded_token = JWT.decode(token, "not_too_safe", true, { algorthim: "HS256"})
+  # # decode token with JWT library
+  # decoded_token = JWT.decode(token, "not_too_safe", true, { algorthim: "HS256"})
 
-  #   # get the user_id from decoded token
-  #   user_id = decoded_token[0]["user_id"]
+  # # get the user_id from decoded token
+  # user_id = decoded_token[0]["user_id"]
 
-  #   # find user by id 
-  #   # user = user.find_by(id: user_id)
-    user = User.find_by(id: params[:id])
+  # # find user by id 
+  # # user = user.find_by(id: user_id)
+  # user = User.find_by(id: params[:id])
 
-  #   # validates user
     if user
       render json: user
     else
-  #     # if user doesn't validate renders error message and status
       render json: { message: "You are not logged in" }, status: :unauthorized
     end
   end
@@ -149,11 +141,15 @@ class UsersController < ApplicationController
   end
 
   private
+    def user_invite_token
+      params.require(:user).permit(:invite_token)
+    end
+
     def user_params
       params.require(:user).permit(:email, :first_name, :last_name, :job_title, :password)
     end
-
-    def user_invite_token
-      params.require(:user).permit(:invite_token)
+    
+    def user_admin_params
+      params.require(:user).permit(:email, :first_name, :last_name, :job_title, :company, :password)
     end
 end
