@@ -1,7 +1,6 @@
 class Invite < ApplicationRecord
   before_create :generate_token
   belongs_to :sender, :class_name => 'User'
-  belongs_to :recipient, :class_name => 'User', optional: true
 
   before_save { self.email = email.downcase }
   VALID_EMAIL_FORMAT = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

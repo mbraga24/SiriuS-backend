@@ -95,25 +95,33 @@ class ProjectsController < ApplicationController
       send_data(binary_data, :type => 'application/zip', :filename => "Project-#{project.name}.zip")
   end
 
-  def complete
-    project = Project.find_by(id: params[:id])
-    project.toggle!(:done)
-    # set the date when the project was completed
-    project[:finish_date] = Time.now.strftime("%m/%d/%Y")
-    render json: { project: ProjectSerializer.new(project) }, status: :ok
-  end
-
   def destroy
     users = []
-    project = Project.find_by(id: params[:id])
-    project_id = project.id
-    project.users.each do |user|
+    complete_project = Project.find_by(id: params[:id])
+    complete_project.toggle!(:done)
+    # set the date when the project was completed
+    complete_project[:finish_date] = Time.now.strftime("%m/%d/%Y")
+  
+    complete_project.users.each do |user|
       if user.available == false
         user.toggle!(:available)
-        users << UserSerializer.new(user)
       end
+      users << UserSerializer.new(user)
     end
-    project.destroy
-    render json: { header: "The project was deleted successfully", projectId: project_id, users: users }, status: :ok
+
+    complete_project.users.each do |user|
+      ProjectTree.find_by(user: user, project: complete_project).destroy
+    end
+
+    complete_project.destroy
+    # byebug
+    render json: { project: ProjectSerializer.new(complete_project), users: users }, status: :ok
   end
+  
+  # def destroy
+  #   project = Project.find_by(id: params[:id])
+  #   project_id = project.id
+  #   project.destroy
+  #   render json: { header: "The project was deleted successfully", projectId: project_id }, status: :ok
+  # end
 end

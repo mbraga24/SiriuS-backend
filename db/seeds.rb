@@ -1,5 +1,7 @@
 ProjectTree.destroy_all
+ArquiveTree.destroy_all
 Project.destroy_all
+ArquiveProject.destroy_all
 Document.destroy_all
 User.destroy_all
 
@@ -22,7 +24,7 @@ project_2 = Project.create(
   start_date: "08/27/2020",
   due_date: "09/20/2020",
   finish_date: Time.now.strftime("%m/%d/%Y"),
-  done: true
+  done: false
 )
 
 project_3 = Project.create(
@@ -183,6 +185,24 @@ Project.all.each do |pro|
   )
 end
 
+arquived_project = ArquiveProject.create(
+  name: "Rivver SaaS Menu Button",
+  description: "This is a new account and a very important client. The team will be respossible for X and Y and we will be holding morning stand-up meetings for about 10-15 minutes to discuss our daily goals. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me any time of the day: (333)-444-9009",
+  start_date: "08/21/2020",
+  due_date: "09/20/2020",
+  finish_date: "11/13/2020"
+)
+
+ArquiveTree.create(
+  user: User.second,
+  arquive_project: arquived_project
+)
+
+ArquiveTree.create(
+  user: User.third,
+  arquive_project: arquived_project
+)
+
 # ========================================================================
 #           CUSTOM USER/PROJECT/DOCUMENT CREATION FOR TESTING
 # ========================================================================
@@ -230,6 +250,8 @@ end
 
 puts "#{User.all.count} users created"
 puts "#{Project.all.count} projects created"
+puts "#{ArquiveTree.all.count} (ArquiveTree) user's associations arquived"
+puts "#{ArquiveProject.all.count} (ArquiveProject) projects arquived"
 puts "#{ProjectTree.all.count} user->project (ProjectTree) created"
 puts "#{Document.all.count} Documents created"
 

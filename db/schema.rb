@@ -10,10 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_11_023603) do
+ActiveRecord::Schema.define(version: 2020_11_15_003240) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "arquive_projects", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.string "start_date"
+    t.string "due_date"
+    t.string "finish_date"
+    t.boolean "arquived", default: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "arquive_trees", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "arquive_project_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["arquive_project_id"], name: "index_arquive_trees_on_arquive_project_id"
+    t.index ["user_id"], name: "index_arquive_trees_on_user_id"
+  end
 
   create_table "documents", force: :cascade do |t|
     t.string "name"
@@ -33,7 +53,6 @@ ActiveRecord::Schema.define(version: 2020_11_11_023603) do
     t.string "custom_invitation"
     t.string "company"
     t.integer "sender_id"
-    t.integer "recipient_id"
     t.string "token"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -72,6 +91,8 @@ ActiveRecord::Schema.define(version: 2020_11_11_023603) do
     t.boolean "admin", default: false
   end
 
+  add_foreign_key "arquive_trees", "arquive_projects"
+  add_foreign_key "arquive_trees", "users"
   add_foreign_key "documents", "projects"
   add_foreign_key "documents", "users"
   add_foreign_key "project_trees", "projects"

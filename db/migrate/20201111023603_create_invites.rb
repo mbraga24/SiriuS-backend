@@ -7,7 +7,6 @@ class CreateInvites < ActiveRecord::Migration[6.0]
       t.string :custom_invitation
       t.string :company
       t.integer :sender_id
-      t.integer :recipient_id
       t.string :token
 
       t.timestamps
