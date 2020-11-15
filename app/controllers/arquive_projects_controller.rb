@@ -1,16 +1,16 @@
 class ArquiveProjectsController < ApplicationController
   def index
-    arquived_projects = ArquiveProject.all.order("id DESC")
-    render json: arquived_projects
+    archived_projects = ArquiveProject.all.order("id DESC")
+    render json: archived_projects
   end
 
   def show
-    arquived_project = ArquiveProject.find_by(id: params[:id])
-    render json: arquived_project
+    archived_project = ArquiveProject.find_by(id: params[:id])
+    render json: archived_project
   end
 
   def create
-    arquived_project = ArquiveProject.create(
+    archived_project = ArquiveProject.create(
       name: params[:name],
       description: params[:description],
       start_date: params[:start_date],
@@ -21,10 +21,10 @@ class ArquiveProjectsController < ApplicationController
     params[:users].each do |user|
       ArquiveTree.create(
         user: User.find_by(email: user[:email]),
-        arquive_project: arquived_project
+        arquive_project: archived_project
       )  
     end
-    render json: { arquived_project: ArquiveProjectSerializer.new(arquived_project) }, status: :ok
+    render json: { archived_project: ArquiveProjectSerializer.new(archived_project) }, status: :ok
   end
   
   def destroy
