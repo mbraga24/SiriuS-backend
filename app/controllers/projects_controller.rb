@@ -93,23 +93,33 @@ class ProjectsController < ApplicationController
       send_data(binary_data, :type => 'application/zip', :filename => "Project-#{project.name}.zip")
   end
 
+  # A completed project will be destroyed and a copy will be made to the ArchiveProject db
   def destroy
     users = []
-    complete_project = Project.find_by(id: params[:id])
-  
-    complete_project.users.each do |user|
+    documents = []
+
+    completed_project = Project.find_by(id: params[:id])
+    
+    # store all documents
+    completed_project.documents.each do |doc|
+      documents << DocumentSerializer.new(doc)
+    end
+    # byebug
+    # change users's availability and store users
+    completed_project.users.each do |user|
       if user.available == false
         user.toggle!(:available)
       end
       users << UserSerializer.new(user)
     end
 
-    complete_project.users.each do |user|
-      ProjectTree.find_by(user: user, project: complete_project).destroy
+    # delete all user's associations with project
+    completed_project.users.each do |user|
+      ProjectTree.find_by(user: user, project: completed_project).destroy
     end
-
-    complete_project.destroy
     # byebug
-    render json: { project: ProjectSerializer.new(complete_project), users: users }, status: :ok
+    completed_project.destroy
+    # byebug
+    render json: { project: ProjectSerializer.new(completed_project), users: users, documents: documents }, status: :ok
   end
 end

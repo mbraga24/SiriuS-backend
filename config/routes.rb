@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show, :destroy]
   resources :invites 
   resources :archive_projects, only: [:index, :show, :create, :destroy]
+  resources :archive_documents, only: [:index, :show, :create]
   
   post '/signup', to: 'users#create'
   post '/login', to: 'users#login'
