@@ -7,8 +7,8 @@ class User < ApplicationRecord
     has_many :project_trees, dependent: :delete_all
     has_many :projects, through: :project_trees
 
-    has_many :arquive_trees, dependent: :delete_all
-    has_many :arquive_projects, through: :arquive_trees
+    has_many :archive_trees, dependent: :delete_all
+    has_many :archive_projects, through: :arquive_trees
   
     before_save { self.email = email.downcase }
     VALID_EMAIL_FORMAT = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

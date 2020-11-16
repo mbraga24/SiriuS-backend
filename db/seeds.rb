@@ -1,7 +1,8 @@
 ProjectTree.destroy_all
-ArquiveTree.destroy_all
+ArchiveTree.destroy_all
+ArchiveDocument.destroy_all
 Project.destroy_all
-ArquiveProject.destroy_all
+ArchiveProject.destroy_all
 Document.destroy_all
 User.destroy_all
 
@@ -13,27 +14,21 @@ project_1 = Project.create(
   name: "Rivver SaaS website",
   description: "This is a new account and a very important client. The team will be respossible for X and Y and we will be holding morning stand-up meetings for about 10-15 minutes to discuss our daily goals. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me any time of the day: (333)-444-9009",
   start_date: "08/25/2020",
-  due_date: "09/20/2020",
-  finish_date: nil,
-  done: false
+  due_date: "09/20/2020"
 )
 
 project_2 = Project.create(
   name: "Rivver SaaS mobile app",
   description: "This is a new account and a very important client. The team will be respossible for X and Y and we will be holding morning stand-up meetings for about 10-15 minutes to discuss our daily goals. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me any time of the day: (333)-444-9009",
   start_date: "08/27/2020",
-  due_date: "09/20/2020",
-  finish_date: Time.now.strftime("%m/%d/%Y"),
-  done: false
+  due_date: "09/20/2020"
 )
 
 project_3 = Project.create(
   name: "Rivver SaaS Website Menu",
   description: "This is a new account and a very important client. The team will be respossible for X and Y and we will be holding morning stand-up meetings for about 10-15 minutes to discuss our daily goals. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me any time of the day: (333)-444-9009",
   start_date: "08/21/2020",
-  due_date: "09/20/2020",
-  finish_date: nil,
-  done: false
+  due_date: "09/20/2020"
 )
 
 # ========================================================================
@@ -185,22 +180,31 @@ Project.all.each do |pro|
   )
 end
 
-arquived_project = ArquiveProject.create(
+# Time.now.strftime("%m/%d/%Y")
+
+archived_project = ArchiveProject.create(
   name: "Rivver SaaS Menu Button",
   description: "This is a new account and a very important client. The team will be respossible for X and Y and we will be holding morning stand-up meetings for about 10-15 minutes to discuss our daily goals. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me any time of the day: (333)-444-9009",
   start_date: "08/21/2020",
   due_date: "09/20/2020",
-  finish_date: "11/13/2020"
+  archived_date: "11/13/2020"
 )
 
-ArquiveTree.create(
+ArchiveTree.create(
   user: User.second,
-  arquive_project: arquived_project
+  archive_project: archived_project
 )
 
-ArquiveTree.create(
+ArchiveTree.create(
   user: User.third,
-  arquive_project: arquived_project
+  archive_project: archived_project
+)
+
+ArchiveDocument.create(
+  name: "Project Requirements",
+  url: "https://res.cloudinary.com/dloh9txdc/image/upload/v1604597179/Project_Requirements_-_Demo_zwe3qu.pdf",
+  user: User.third,
+  archive_project: archived_project
 )
 
 # ========================================================================
@@ -250,8 +254,9 @@ end
 
 puts "#{User.all.count} users created"
 puts "#{Project.all.count} projects created"
-puts "#{ArquiveTree.all.count} (ArquiveTree) user's associations arquived"
-puts "#{ArquiveProject.all.count} (ArquiveProject) projects arquived"
+puts "#{ArchiveTree.all.count} (ArchiveTree) user's associations archived"
+puts "#{ArchiveDocument.all.count} (ArchiveDocument) document's associations archived"
+puts "#{ArchiveProject.all.count} (ArchiveProject) projects archived"
 puts "#{ProjectTree.all.count} user->project (ProjectTree) created"
 puts "#{Document.all.count} Documents created"
 

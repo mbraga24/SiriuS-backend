@@ -5,11 +5,11 @@ one:
   description: MyString
   start_date: MyString
   due_date: MyString
-  finish_date: MyString
+  archived_date: MyString
 
 two:
   name: MyString
   description: MyString
   start_date: MyString
   due_date: MyString
-  finish_date: MyString
+  archived_date: MyString

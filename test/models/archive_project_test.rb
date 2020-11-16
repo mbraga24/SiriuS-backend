@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ArquiveTreeTest < ActiveSupport::TestCase
+class ArchiveProjectTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

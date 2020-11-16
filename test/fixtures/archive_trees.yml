@@ -2,8 +2,8 @@
 
 one:
   user: one
-  arquive_project: one
+  archive_project: one
 
 two:
   user: two
-  arquive_project: two
+  archive_project: two
