@@ -1,5 +1,3 @@
 class ArchiveDocumentSerializer < ActiveModel::Serializer
-  attributes :id, :name, :url
-  belongs_to :user
-  belongs_to :archive_project
+  attributes :id, :name, :url, :user, :archive_project
 end
