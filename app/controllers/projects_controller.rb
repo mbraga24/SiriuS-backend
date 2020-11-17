@@ -68,31 +68,6 @@ class ProjectsController < ApplicationController
     render json: { users: new_users, project: ProjectSerializer.new(project) }
   end
 
-  def download_zip
-    project = Project.find_by(id: params[:id])
-      stringio = Zip::OutputStream.write_buffer do |zio|
-        # create text file with all the project's details
-        zio.put_next_entry "#{project.name}-#{project.id}.txt"
-        zio.write "Project Name: \n"
-        zio.print "#{project[:name]} \n"
-        zio.write "Project Description: \n"
-        zio.print "#{project[:description]} \n"
-        zio.write "Project Start Date: \n"
-        zio.print "#{project[:start_date]} \n"
-        zio.write "Project Due Date: \n"
-        zio.print "#{project[:due_date]} \n"
-        zio.write "Project Closed Date: \n"
-        zio.print "#{project[:finish_date]} \n"   
-        
-        # create .json file with all the project's details
-        zio.put_next_entry "#{project.name}-#{project.id}.json"
-        zio.print project.to_json(only: [:name, :description, :start_date, :due_date, :finish_date])
-      end
-      stringio.rewind
-      binary_data = stringio.sysread
-      send_data(binary_data, :type => 'application/zip', :filename => "Project-#{project.name}.zip")
-  end
-
   # A completed project will be destroyed and a copy will be made to the ArchiveProject db
   def destroy
     users = []

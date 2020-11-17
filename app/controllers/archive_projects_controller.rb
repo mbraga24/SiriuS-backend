@@ -37,6 +37,31 @@ class ArchiveProjectsController < ApplicationController
 
     render json: { archived_project: ArchiveProjectSerializer.new(archived_project) }, status: :ok
   end
+
+  def download_zip
+    archived_project = ArchiveProject.find_by(id: params[:id])
+      stringio = Zip::OutputStream.write_buffer do |zio|
+        # create text file with all the project's details
+        zio.put_next_entry "#{archived_project.name}-#{archived_project.id}.txt"
+        zio.write "Project Name: \n"
+        zio.print "#{archived_project[:name]} \n"
+        zio.write "Project Description: \n"
+        zio.print "#{archived_project[:description]} \n"
+        zio.write "Project Start Date: \n"
+        zio.print "#{archived_project[:start_date]} \n"
+        zio.write "Project Due Date: \n"
+        zio.print "#{archived_project[:due_date]} \n"
+        zio.write "Archived Date: \n"
+        zio.print "#{archived_project[:archived_date]} \n"   
+        
+        # create .json file with all the project's details
+        zio.put_next_entry "#{archived_project.name}-#{archived_project.id}.json"
+        zio.print archived_project.to_json(only: [:name, :description, :start_date, :due_date, :archived_date])
+      end
+      stringio.rewind
+      binary_data = stringio.sysread
+      send_data(binary_data, :type => 'application/zip', :filename => "Project-#{archived_project.name}.zip")
+  end
   
   def destroy
     archiveProject = ArchiveProject.find_by(id: params[:id])
