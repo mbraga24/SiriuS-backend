@@ -10,6 +10,7 @@ class ProjectsController < ApplicationController
   end
 
   def create
+    # byebug
     assignedUsers = []
     users = params[:assigned]
     project = Project.create( 
@@ -37,7 +38,12 @@ class ProjectsController < ApplicationController
         assignedUsers << UserSerializer.new(user)
       end
     end
-    render json: { project: ProjectSerializer.new(project), users: assignedUsers }, status: :created
+
+    if project.valid?
+      render json: { project: ProjectSerializer.new(project), users: assignedUsers }, status: :created
+    else
+      render json: { header: "Something went wrong", error: @project.errors.full_messages }, status: :bad_request 
+    end
   end
 
   def add_users_to_project
