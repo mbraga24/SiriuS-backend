@@ -13,6 +13,12 @@ class ProjectsController < ApplicationController
     # byebug
     assignedUsers = []
     users = params[:assigned]
+
+    # start_date = "11-28-2020 - 11-30-2020".split(/,| - /)[0]
+    # dute_date = "11-28-2020 - 11-30-2020".split(/,| - /)[1]
+    # start_date = dateOne.split("-").join("/")
+    # dute_date = dateTwo.split("-").join("/")  
+
     project = Project.create( 
       name: params[:name], 
       description: params[:description], 
@@ -42,7 +48,7 @@ class ProjectsController < ApplicationController
     if project.valid?
       render json: { project: ProjectSerializer.new(project), users: assignedUsers }, status: :created
     else
-      render json: { header: "Something went wrong", error: @project.errors.full_messages }, status: :bad_request 
+      render json: { header: "The following #{project.errors.count} errors occurred:", error: project.errors.full_messages }, status: :bad_request 
     end
   end
 

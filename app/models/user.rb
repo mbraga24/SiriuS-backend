@@ -1,14 +1,17 @@
 class User < ApplicationRecord
     has_secure_password
     
-    has_many :documents, dependent: :delete_all    
     has_many :sent_invites, :class_name => "Invite", :foreign_key => 'sender_id'
+
+    has_many :documents, dependent: :delete_all    
+    has_many :archive_document, dependent: :delete_all
 
     has_many :project_trees, dependent: :delete_all
     has_many :projects, through: :project_trees
 
     has_many :archive_trees, dependent: :delete_all
     has_many :archive_projects, through: :arquive_trees
+
   
     before_save { self.email = email.downcase }
     VALID_EMAIL_FORMAT = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
