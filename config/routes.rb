@@ -12,6 +12,6 @@ Rails.application.routes.draw do
   resources :archive_projects, only: [:index, :show, :create, :destroy]
   get '/download/:id', to: 'archive_projects#download_zip'
 
-  resources :projects, only: [:index, :create, :show, :destroy]
+  resources :projects, only: [:index, :create, :update, :show, :destroy]
   patch '/add_user/project', to: 'projects#add_users_to_project'
 end

@@ -25,43 +25,44 @@ class User < ApplicationRecord
               uniqueness: { case_sensitive: false },
               format: { with: VALID_EMAIL_FORMAT }
                 
-    validates :password,
-              presence: true, # <= does not work with custom validations - read more at the bottom
-              length: { minimum: 6, maximum: 255 }
-
+              
     validates :job_title,
               presence: true,
               length: { minimum: 6, maximum: 255 }
+              
+    validate :password_cant_be_blank          
+    validate :password_lower_case
+    validate :password_uppercase
+    validate :password_special_char
+    validate :password_contains_number            
+    validates :password, length: { minimum: 6, maximum: 255 }
   
-    # validate :password_lower_case
-    # validate :password_uppercase
-    # validate :password_special_char
-    # validate :password_contains_number            
+    def password_cant_be_blank
+      if !!password.present? && password.blank? 
+        return errors.add :password, "can't be blank "
+      end
+    end
+
+    def password_lower_case
+      return if !password.blank? && !!password.match(/\p{Lower}/)
+      errors.add :password, ' must contain at least 1 uppercase '
+    end
   
-    # def password_lower_case
-    #   return if !!password.match(/\p{Lower}/)
-    #   errors.add :password, ' must contain at least 1 lowercase '
-    # end
+    def password_uppercase
+      return if !password.blank? && !!password.match(/\p{Upper}/)
+      errors.add :password, ' must contain at least 1 lowercase '
+    end
   
-    # def password_uppercase
-    #   return if !!password.match(/\p{Upper}/)
-    #   errors.add :password, ' must contain at least 1 uppercase '
-    # end
+    def password_special_char
+      special = "?<>',?[]}{=-)(*&^%$#`~{}!"
+      regex = /[#{special.gsub(/./){|char| "\\#{char}"}}]/
+      return if !password.blank? && password =~ regex
+      errors.add :password, ' must contain special character'
+    end
   
-    # def password_special_char
-    #   special = "?<>',?[]}{=-)(*&^%$#`~{}!"
-    #   regex = /[#{special.gsub(/./){|char| "\\#{char}"}}]/
-    #   return if password =~ regex
-    #   errors.add :password, ' must contain special character'
-    # end
-  
-    # def password_contains_number
-    #   return if password.count("0-9") > 0
-    #   errors.add :password, ' must contain at least one number'
-    # end
-  
-    # All custom validations work with or without ":password presence: true". 
-    # Unfortunately the "presence: true" validations does not work when the 
-    # password field is blank and submitted. 
+    def password_contains_number
+      return if !password.blank? && password.count("0-9") > 0
+      errors.add :password, ' must contain at least one number'
+    end
   end
   

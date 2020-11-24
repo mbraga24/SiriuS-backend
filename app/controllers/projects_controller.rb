@@ -9,6 +9,48 @@ class ProjectsController < ApplicationController
     render json: project
   end
 
+  def update 
+    
+    assignedUsers = []
+    users = params[:assigned]
+    project = Project.find_by(id: params[:id])
+    
+    # byebug
+    project.update( 
+      name: params[:name], 
+      description: params[:description], 
+      start_date: params[:startDate], 
+      due_date: params[:dueDate]
+    )
+
+    if !project.errors.any?
+
+      project.users.each do |user|
+        if !users.include? user.id
+          ProjectTree.find_by(user: user, project: project).destroy
+        end
+      end
+      
+      user = nil
+      users.each do |u|
+        user_int = u.to_i
+        user = User.find_by(id: user_int)
+        
+        if !project.users.find_by(id: user_int)
+          ProjectTree.create(user: user, project: project)
+        end
+        assignedUsers << UserSerializer.new(user)
+      end
+
+      project = Project.find_by(id: params[:id])
+
+      render json: { project: ProjectSerializer.new(project), users: assignedUsers }, status: :accepted
+    else
+      render json: { header: "The following #{project.errors.count} errors occurred:", error: project.errors.full_messages }, status: :bad_request 
+    end
+
+  end
+
   def create
     # byebug
     assignedUsers = []

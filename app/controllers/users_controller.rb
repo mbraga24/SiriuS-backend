@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   end
 
   def create 
+    # byebug
     # if invite_token exists create user 
     if user_invite_token[:invite_token] && Invite.find_by(token: user_invite_token[:invite_token]).present?
       
@@ -32,7 +33,7 @@ class UsersController < ApplicationController
           render json: { user: UserSerializer.new(@user), invite: InviteSerializer.new(invite) }, status: :created
       else
         # byebug
-        render json: { header: "You need to fulfill these #{@user.errors.full_messages.count} password requirements", error: @user.errors.full_messages }, status: :bad_request 
+        render json: { header: "Please fulfill these #{@user.errors.full_messages.count} requirements", error: @user.errors.full_messages }, status: :bad_request 
       end
     else
       # else create new admin
