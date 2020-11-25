@@ -15,16 +15,13 @@ class UsersController < ApplicationController
     user = User.find_by(id: params[:id])
     current_email = user.email
 
-    # https://stackoverflow.com/questions/34514862/rails-how-to-require-the-current-password-to-allow-user-update
-
     # byebug
     user.update( 
       first_name: params[:firstName], 
       last_name: params[:lastName], 
       company: params[:company], 
       job_title: params[:jobTitle],
-      email: params[:email]
-      # password: "1L*vesalami"      
+      email: params[:email] 
     )
     # byebug
     if user.valid?

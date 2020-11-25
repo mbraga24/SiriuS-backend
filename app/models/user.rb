@@ -1,6 +1,6 @@
 class User < ApplicationRecord
     has_secure_password
-    
+
     has_many :sent_invites, :class_name => "Invite", :foreign_key => 'sender_id'
 
     has_many :documents, dependent: :delete_all    
@@ -11,7 +11,6 @@ class User < ApplicationRecord
 
     has_many :archive_trees, dependent: :delete_all
     has_many :archive_projects, through: :arquive_trees
-
   
     before_save { self.email = email.downcase }
     VALID_EMAIL_FORMAT = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -30,12 +29,14 @@ class User < ApplicationRecord
               presence: true,
               length: { minimum: 6, maximum: 255 }
               
-    validate :password_cant_be_blank          
-    validate :password_lower_case
-    validate :password_uppercase
-    validate :password_special_char
-    validate :password_contains_number            
-    validates :password, length: { minimum: 6, maximum: 255 }
+    validate :password_cant_be_blank, :if => :password          
+    validate :password_lower_case, :if => :password
+    validate :password_uppercase, :if => :password
+    validate :password_special_char, :if => :password
+    validate :password_contains_number, :if => :password            
+    validates :password, length: { minimum: 6, maximum: 255 }, :if => :password
+
+    # , :if => :password_digest_changed?
   
     def password_cant_be_blank
       if !!password.present? && password.blank? 
