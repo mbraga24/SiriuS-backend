@@ -1,0 +1,3 @@
+<h3 style="font-family: sans-serif; color: #3c2b79; font-size: 14px;">Hello <span style="color: #483396;"><%= @user.first_name %> <%= @user.last_name %>!</span></h3>
+<p style="font-family: sans-serif; color: #483396; font-size: 14px;">Thank you for updating your email from <a style="text-decoration: none; color: #80265f; font-weight: bold;"><%= @prev_email %></a> to <a style="text-decoration: none; color: #80265f; font-weight: bold;"><%= @user.email %></a>.</p>
+<h4 style="font-family: sans-serif; color: #483396; font-size: 14px;"><%= link_to "Sign in", @link, {:style=> "text-decoration: none; font-weight: bold"} %> with your new email.</h4>

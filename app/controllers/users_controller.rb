@@ -11,25 +11,29 @@ class UsersController < ApplicationController
   end
 
   def update
-    byebug
+    # byebug
     user = User.find_by(id: params[:id])
     current_email = user.email
 
+    # byebug
     user.update( 
       first_name: params[:firstName], 
-      last_name: params[:last_name], 
+      last_name: params[:lastName], 
       company: params[:company], 
       job_title: params[:jobTitle],
-      email: params[:email] 
+      email: params[:email],
+      password: user[:password_digest]
     )
-
-    if user.errors.any?
-
-      if current_email === params[:email] 
-        
+    # byebug
+    if !user.errors.any?
+      user = User.find_by(id: params[:id])
+      
+      if current_email != params[:email] 
+        link = "http://localhost:3001/login"
+        EmailChangeMailer.new_email(current_email, user, link).deliver
       end
 
-      render json: UserSerializer.new(user)
+      render json: user
     else 
       render json: { header: "These #{user.errors.full_messages.count} errors occurred:", error: user.errors.full_messages }, status: :bad_request 
     end
