@@ -15,25 +15,29 @@ class UsersController < ApplicationController
     user = User.find_by(id: params[:id])
     current_email = user.email
 
+    # https://stackoverflow.com/questions/34514862/rails-how-to-require-the-current-password-to-allow-user-update
+
     # byebug
     user.update( 
       first_name: params[:firstName], 
       last_name: params[:lastName], 
       company: params[:company], 
       job_title: params[:jobTitle],
-      email: params[:email],
-      password: user[:password_digest]
+      email: params[:email]
+      # password: "1L*vesalami"      
     )
     # byebug
-    if !user.errors.any?
+    if user.valid?
+      log_out = false
       user = User.find_by(id: params[:id])
       
       if current_email != params[:email] 
+        log_out = true
         link = "http://localhost:3001/login"
         EmailChangeMailer.new_email(current_email, user, link).deliver
       end
 
-      render json: user
+      render json: { user: user, logOut: log_out}
     else 
       render json: { header: "These #{user.errors.full_messages.count} errors occurred:", error: user.errors.full_messages }, status: :bad_request 
     end
