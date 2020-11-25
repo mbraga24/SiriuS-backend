@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :documents, only: [:index, :create]
   resources :archive_documents, only: [:index, :show, :create]
 
-  resources :users, only: [:index, :show, :destroy]
+  resources :users, only: [:index, :update, :show, :destroy]
   post '/signup', to: 'users#create'
   post '/login', to: 'users#login'
   get '/autologin/:id', to: 'users#autologin'

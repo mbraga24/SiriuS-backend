@@ -10,6 +10,31 @@ class UsersController < ApplicationController
     render json: user
   end
 
+  def update
+    byebug
+    user = User.find_by(id: params[:id])
+    current_email = user.email
+
+    user.update( 
+      first_name: params[:firstName], 
+      last_name: params[:last_name], 
+      company: params[:company], 
+      job_title: params[:jobTitle],
+      email: params[:email] 
+    )
+
+    if user.errors.any?
+
+      if current_email === params[:email] 
+        
+      end
+
+      render json: UserSerializer.new(user)
+    else 
+      render json: { header: "These #{user.errors.full_messages.count} errors occurred:", error: user.errors.full_messages }, status: :bad_request 
+    end
+  end
+
   def create 
     # byebug
     # if invite_token exists create user 
@@ -93,19 +118,19 @@ class UsersController < ApplicationController
     end
   end
 
-  def update
-    user = User.find_by(id: params[:id])
+  # def update
+  #   user = User.find_by(id: params[:id])
 
-    if user.valid? && user.projects.count == 2
-      user.toggle!(:available)
+  #   if user.valid? && user.projects.count == 2
+  #     user.toggle!(:available)
       
-      render json: user
-    elsif user.valid? &&  user.projects.count < 2
-      render json: user
-    else
-      render json: { message: "Something went wrong!" }, status: :bad_request
-    end
-  end
+  #     render json: user
+  #   elsif user.valid? &&  user.projects.count < 2
+  #     render json: user
+  #   else
+  #     render json: { message: "Something went wrong!" }, status: :bad_request
+  #   end
+  # end
 
   def remove_project
     # find project and user by their id
