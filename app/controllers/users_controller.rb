@@ -26,17 +26,20 @@ class UsersController < ApplicationController
     # byebug
     if user.valid?
       log_out = false
+      success = "You're all set. Your account has been updated"
       user = User.find_by(id: params[:id])
       
       if current_email != params[:email] 
         log_out = true
+        success = "We see you changed your email. We're signing you out..."
         link = "http://localhost:3001/login"
-        EmailChangeMailer.new_email(current_email, user, link).deliver
+        EmailChangeMailer.new_email(current_email, user, link).deliver_later
       end
 
-      render json: { user: user, logOut: log_out}
+      render json: { user: user, logOut: log_out, success: success}, status: :accepted
+      
     else 
-      render json: { header: "These #{user.errors.full_messages.count} errors occurred:", error: user.errors.full_messages }, status: :bad_request 
+      render json: { header: "#{user.errors.full_messages.count} #{user.errors.full_messages.count > 1 ? "errors" : "error"} occurred:", error: user.errors.full_messages }, status: :not_acceptable 
     end
   end
 
