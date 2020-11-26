@@ -35,8 +35,6 @@ class User < ApplicationRecord
     validate :password_special_char, :if => :password
     validate :password_contains_number, :if => :password            
     validates :password, length: { minimum: 6, maximum: 255 }, :if => :password
-
-    # , :if => :password_digest_changed?
   
     def password_cant_be_blank
       if !!password.present? && password.blank? 

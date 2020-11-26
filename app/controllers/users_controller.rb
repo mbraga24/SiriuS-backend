@@ -82,22 +82,27 @@ class UsersController < ApplicationController
     end
   end
 
-  def login 
-    # byebug
-    # find user by email
-    user = User.find_by(email: params[:email])
-    # byebug
-    # validates user and password (authentication)
-    if user && user.authenticate(params[:password])
-      # byebug
-      # encrypt the user id ====> token = JWT.encode payload, password parameter, 'algorithm'
-      # token = JWT.encode({ user_id: user.id }, "not_too_safe", "HS256")
 
-      # if it validates to true renders json: user & token ====> run user explicitly through serializer
-      # render json: { user: userSerializer.new(user), token: token, header: "Welcome, #{user.first_name} #{user.last_name}!", message: [], type: "success" }
-      render json: { user: UserSerializer.new(user) }
-    else
-      render json: { header: "Uh-oh! Invalid email or password", message: [], type: "error" }, status: :unauthorized
+  # FIX THIS
+  def login 
+    if !params[:email].blank? && !params[:password].blank?
+      # byebug
+      user = User.find_by(email: params[:email])
+
+      # validates user and password (authentication)
+      if user && user.authenticate(params[:password])
+        # encrypt the user id ====> token = JWT.encode payload, password parameter, 'algorithm'
+        # token = JWT.encode({ user_id: user.id }, "not_too_safe", "HS256")
+
+        # if it validates to true renders json: user & token ====> run user explicitly through serializer
+        # render json: { user: userSerializer.new(user), token: token, header: "Welcome, #{user.first_name} #{user.last_name}!", message: [], type: "success" }
+        render json: { user: UserSerializer.new(user) }, status: :accepted
+      else
+        render json: { header: "Something went wrong with your credentials.", message: [], type: "error" }, status: :unauthorized
+      end
+
+    else 
+      render json: { header: "Please enter email and password", message: [], type: "error" }, status: :unauthorized
     end
   end
 
