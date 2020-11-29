@@ -36,7 +36,7 @@ project_3 = Project.create(
 # ========================================================================
 
 marlon = User.create(
-  email: "admin@example.com",
+  email: "marlon@example.com",
   first_name: "Marlon",
   last_name: "Braga",
   company: "Design Monkey",
