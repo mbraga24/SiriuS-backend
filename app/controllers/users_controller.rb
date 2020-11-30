@@ -31,7 +31,7 @@ class UsersController < ApplicationController
       
       if current_email != params[:email] 
         log_out = true
-        success = "We see you changed your email. We're signing you out..."
+        success = "We see you changed your email. Please log in with your new email. We're signing you out..."
         link = "http://localhost:3001/login"
         EmailChangeMailer.new_email(current_email, user, link).deliver_later
       end
@@ -130,20 +130,6 @@ class UsersController < ApplicationController
       render json: { message: "You are not logged in" }, status: :unauthorized
     end
   end
-
-  # def update
-  #   user = User.find_by(id: params[:id])
-
-  #   if user.valid? && user.projects.count == 2
-  #     user.toggle!(:available)
-      
-  #     render json: user
-  #   elsif user.valid? &&  user.projects.count < 2
-  #     render json: user
-  #   else
-  #     render json: { message: "Something went wrong!" }, status: :bad_request
-  #   end
-  # end
 
   def remove_project
     # find project and user by their id

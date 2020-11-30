@@ -128,7 +128,7 @@ will = User.create(
 # ========================================================================
 
 ALLOW_USERS = User.all.find_all do |user|
-  (user.email != 'william@example.com') && (user.email != 'johnathan@example.com') && (user.email != 'admin@example.com') && (user.email != 'andrew@example.com')
+  (user.email != 'william@example.com') && (user.email != 'johnathan@example.com') && (user.email != 'marlon@example.com') && (user.email != 'andrew@example.com')
 end
 
 def random_users 
@@ -207,9 +207,9 @@ ArchiveDocument.create(
   archive_project: archived_project
 )
 
-# ========================================================================
-#           CUSTOM USER/PROJECT/DOCUMENT CREATION FOR TESTING
-# ========================================================================
+# =============================================================================================
+#           CUSTOM USER/PROJECT/DOCUMENT CREATION FOR TESTING >MARLON< AND >ANDREW<
+# =============================================================================================
 
 ProjectTree.create(
     user: andrew,
@@ -244,9 +244,13 @@ document_4 = Document.create(
   project: project_3
 )
 
+# =============================================================================================
+#           SET ALL USERS WITH LEE
+# =============================================================================================
 
 User.all.each do |user| 
-  if user.projects.count < 3 && user.email != "admin@example.com"
+  # user.email != "admin@example.com"
+  if user.projects.count < 3
     toggle_user = User.find_by(id: user[:id]) 
     toggle_user.toggle!(:available)
   end

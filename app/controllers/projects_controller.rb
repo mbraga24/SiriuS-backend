@@ -11,23 +11,27 @@ class ProjectsController < ApplicationController
 
   def update 
     
-    assignedUsers = []
+    updated_users = []
     users = params[:assigned]
     project = Project.find_by(id: params[:id])
     
-    # byebug
     project.update( 
       name: params[:name], 
       description: params[:description], 
       start_date: params[:startDate], 
       due_date: params[:dueDate]
-    )
+      )
 
     if !project.errors.any?
-
+      
       project.users.each do |user|
         if !users.include? user.id
+          if user.available == false && user.projects.count == 3
+            user.toggle!(:available)
+          end
           ProjectTree.find_by(user: user, project: project).destroy
+    
+          updated_users << UserSerializer.new(user)
         end
       end
       
@@ -37,14 +41,19 @@ class ProjectsController < ApplicationController
         user = User.find_by(id: user_int)
         
         if !project.users.find_by(id: user_int)
+          if user.projects.count == 2
+            user.toggle!(:available)
+          end
           ProjectTree.create(user: user, project: project)
+    
+          updated_users << UserSerializer.new(user)
         end
-        assignedUsers << UserSerializer.new(user)
       end
 
-      project = Project.find_by(id: params[:id])
 
-      render json: { project: ProjectSerializer.new(project), users: assignedUsers }, status: :accepted
+      updated_project = Project.find_by(id: params[:id])
+
+      render json: { project: ProjectSerializer.new(updated_project), users: updated_users }, status: :accepted
     else
       render json: { header: "The following #{project.errors.count} errors occurred:", error: project.errors.full_messages }, status: :bad_request 
     end
@@ -52,8 +61,7 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    # byebug
-    assignedUsers = []
+    assigned_users = []
     users = params[:assigned]
 
     # start_date = "11-28-2020 - 11-30-2020".split(/,| - /)[0]
@@ -77,18 +85,18 @@ class ProjectsController < ApplicationController
           project: project
         ) 
           user.toggle!(:available)
-          assignedUsers << UserSerializer.new(user)
+          assigned_users << UserSerializer.new(user)
       else
         ProjectTree.create(
           user: user,
           project: project
         ) 
-        assignedUsers << UserSerializer.new(user)
+        assigned_users << UserSerializer.new(user)
       end
     end
 
     if project.valid?
-      render json: { project: ProjectSerializer.new(project), users: assignedUsers }, status: :created
+      render json: { project: ProjectSerializer.new(project), users: assigned_users }, status: :created
     else
       render json: { header: "The following #{project.errors.count} errors occurred:", error: project.errors.full_messages }, status: :bad_request 
     end
