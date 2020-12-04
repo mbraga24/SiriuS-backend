@@ -10,9 +10,6 @@ class ProjectsController < ApplicationController
   end
 
   def update 
-    
-    updated_users = []
-    users = params[:assigned]
     project = Project.find_by(id: params[:id])
     
     project.update( 
@@ -20,40 +17,10 @@ class ProjectsController < ApplicationController
       description: params[:description], 
       start_date: params[:startDate], 
       due_date: params[:dueDate]
-      )
+    )
 
-    if !project.errors.any?
-      
-      project.users.each do |user|
-        if !users.include? user.id
-          if user.available == false && user.projects.count == 3
-            user.toggle!(:available)
-          end
-          ProjectTree.find_by(user: user, project: project).destroy
-    
-          updated_users << UserSerializer.new(user)
-        end
-      end
-      
-      user = nil
-      users.each do |u|
-        user_int = u.to_i
-        user = User.find_by(id: user_int)
-        
-        if !project.users.find_by(id: user_int)
-          if user.projects.count == 2
-            user.toggle!(:available)
-          end
-          ProjectTree.create(user: user, project: project)
-    
-          updated_users << UserSerializer.new(user)
-        end
-      end
-
-
-      updated_project = Project.find_by(id: params[:id])
-
-      render json: { project: ProjectSerializer.new(updated_project), users: updated_users }, status: :accepted
+    if project.valid?
+      render json: { project: ProjectSerializer.new(project) }, status: :accepted
     else
       render json: { header: "The following #{project.errors.count} errors occurred:", error: project.errors.full_messages }, status: :bad_request 
     end
@@ -63,11 +30,6 @@ class ProjectsController < ApplicationController
   def create
     assigned_users = []
     users = params[:assigned]
-
-    # start_date = "11-28-2020 - 11-30-2020".split(/,| - /)[0]
-    # dute_date = "11-28-2020 - 11-30-2020".split(/,| - /)[1]
-    # start_date = dateOne.split("-").join("/")
-    # dute_date = dateTwo.split("-").join("/")  
 
     project = Project.create( 
       name: params[:name], 
