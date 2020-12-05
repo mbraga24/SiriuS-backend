@@ -1,4 +1,4 @@
-class ArchiveDocumentsController < ApplicationController
+class Api::V1::ArchiveDocumentsController < ApplicationController
   
   def index
     arch_documents = ArchiveDocument.all
