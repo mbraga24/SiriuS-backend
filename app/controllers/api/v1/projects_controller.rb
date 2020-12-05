@@ -1,4 +1,4 @@
-class ProjectsController < ApplicationController
+class Api::V1::ProjectsController < ApplicationController
 
   def index
     projects = Project.all.order("id DESC")

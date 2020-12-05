@@ -1,4 +1,4 @@
-class InvitesController < ApplicationController
+class Api::V1::InvitesController < ApplicationController
   
   def index
     invites = Invite.all

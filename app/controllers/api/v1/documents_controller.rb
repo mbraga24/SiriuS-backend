@@ -1,4 +1,4 @@
-class DocumentsController < ApplicationController
+class Api::V1::DocumentsController < ApplicationController
 
   def index
     documents = Document.all.order('created_at ASC')

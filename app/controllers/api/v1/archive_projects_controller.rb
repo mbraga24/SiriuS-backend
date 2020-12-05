@@ -1,4 +1,4 @@
-class ArchiveProjectsController < ApplicationController
+class Api::V1::ArchiveProjectsController < ApplicationController
 
   def index
     archived_projects = ArchiveProject.all.order("id DESC")
