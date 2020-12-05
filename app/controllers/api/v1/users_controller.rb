@@ -41,23 +41,27 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def create 
-    # if invite_token exists create user 
-    if user_invite_token[:invite_token] && Invite.find_by(token: user_invite_token[:invite_token]).present?
-      invite = Invite.find_by(token: user_invite_token[:invite_token])
-      @admin = invite.sender
-      @user = User.new(user_params)
-      @user.company = @admin.company
+    if user_invite_token[:invite_token]
+      @invite = Invite.find_by(token: user_invite_token[:invite_token])
 
-      if @user.valid? 
-        @user.save
-          # encrypt the user id ====> token = JWT.encode payload, password parameter, 'algorithm'
-          token = JWT.encode({ user_id: user.id }, "not_too_safe", "HS256")
-          UserNotifierMailer.send_signup_email(@user, @admin).deliver
-          # destroy invitation once user was created
-          invite.destroy
-          render json: { user: UserSerializer.new(@user), token: token, invite: InviteSerializer.new(invite) }, status: :created
-      else
-        render json: { header: "Please fulfill these #{@user.errors.full_messages.count} requirements", error: @user.errors.full_messages }, status: :bad_request 
+      if @invite.present? && user_params[:email] == @invite.email
+        @admin = @invite.sender
+        @user = User.new(user_params)
+        @user.company = @admin.company
+
+        if @user.valid? 
+          @user.save
+            # encrypt the user id ====> token = JWT.encode payload, password parameter, 'algorithm'
+            token = JWT.encode({ user_id: @user.id }, "not_too_safe", "HS256")
+            UserNotifierMailer.send_signup_email(@user, @admin).deliver
+            # destroy invitation once user was created
+            @invite.destroy
+            render json: { user: UserSerializer.new(@user), token: token, invite: InviteSerializer.new(@invite) }, status: :created
+        else
+          render json: { header: "Please fulfill these #{@user.errors.full_messages.count} requirements", error: @user.errors.full_messages }, status: :bad_request 
+        end  
+      else 
+        render json: { header: "There is something wrong with your credentials:", error: ["Please try the email you received this invitation", "Your invitation might have expired", "You might have to request a new invitation"] }, status: :bad_request 
       end
     else
       # else create new admin
@@ -69,50 +73,6 @@ class Api::V1::UsersController < ApplicationController
       else  
         render json: { header: "You need to fulfill these #{@admin.errors.full_messages.count} password requirements", error: @admin.errors.full_messages }, status: :bad_request 
       end
-    end
-  end
-
-  def login 
-    if !params[:email].blank? && !params[:password].blank?
-
-      @user = User.find_by(email: params[:email])
-    
-      if @user && @user.authenticate(params[:password])
-        # encrypt the user id ====> token = JWT.encode payload, password parameter, 'algorithm'
-        token = JWT.encode({ user_id: @user.id }, "not_too_safe", "HS256")
-        
-        # "Welcome, #{user.first_name} #{user.last_name}!"
-        render json: { user: UserSerializer.new(@user), token: token }, status: :accepted
-      else
-        render json: { header: "Something went wrong with your credentials.", message: [], type: "error" }, status: :unauthorized
-      end
-
-    else 
-      render json: { header: "Please enter email and password", message: [], type: "error" }, status: :unauthorized
-    end
-  end
-
-  def autologin
-    # byebug
-    # extract the auth header
-    auth_header = request.headers['Authorization']
-
-    # split the string and get the encrypted token we need
-    token = auth_header.split(" ")[1]
-
-    # decode token with JWT library
-    decoded_token = JWT.decode(token, "not_too_safe", true, { algorthim: "HS256"})
-
-    # get the user_id from decoded token
-    user_id = decoded_token[0]["user_id"]
-
-    # find user by id 
-    user = User.find_by(id: user_id)
-
-    if user
-      render json: user
-    else
-      render json: { message: "You are not logged in" }, status: :unauthorized
     end
   end
 
