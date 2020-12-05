@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+
   def index
     projects = Project.all.order("id DESC")
     render json: projects
@@ -70,7 +71,7 @@ class ProjectsController < ApplicationController
 
     params[:users].each do |u_id|
       user = User.find_by(id: u_id)
-      # if user is assigned to 2 projects make it unavailable
+      # if user is assigned to 2 projects change user's availability
       if user.projects.count == 2
         ProjectTree.create(
           user: user,
@@ -103,7 +104,6 @@ class ProjectsController < ApplicationController
     completed_project.documents.each do |doc|
       documents << DocumentSerializer.new(doc)
     end
-    # byebug
     # change users's availability and store users
     completed_project.users.each do |user|
       if user.available == false
@@ -116,9 +116,8 @@ class ProjectsController < ApplicationController
     completed_project.users.each do |user|
       ProjectTree.find_by(user: user, project: completed_project).destroy
     end
-    # byebug
     completed_project.destroy
-    # byebug
     render json: { project: ProjectSerializer.new(completed_project), users: users, documents: documents }, status: :ok
   end
+  
 end

@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
+
   def index
     users = User.all
-
     render json: users
   end
 
@@ -11,11 +11,9 @@ class UsersController < ApplicationController
   end
 
   def update
-    # byebug
     user = User.find_by(id: params[:id])
     current_email = user.email
 
-    # byebug
     user.update( 
       first_name: params[:firstName], 
       last_name: params[:lastName], 
@@ -23,7 +21,6 @@ class UsersController < ApplicationController
       job_title: params[:jobTitle],
       email: params[:email] 
     )
-    # byebug
     if user.valid?
       log_out = false
       success = "You're all set. Your account has been updated"
@@ -44,7 +41,6 @@ class UsersController < ApplicationController
   end
 
   def create 
-    # byebug
     # if invite_token exists create user 
     if user_invite_token[:invite_token] && Invite.find_by(token: user_invite_token[:invite_token]).present?
       
@@ -65,7 +61,7 @@ class UsersController < ApplicationController
           invite.destroy
           render json: { user: UserSerializer.new(@user), invite: InviteSerializer.new(invite) }, status: :created
       else
-        # byebug
+  
         render json: { header: "Please fulfill these #{@user.errors.full_messages.count} requirements", error: @user.errors.full_messages }, status: :bad_request 
       end
     else
@@ -73,9 +69,8 @@ class UsersController < ApplicationController
       @admin = User.new(user_admin_params)
       @admin.admin = true
       if @admin.save 
-        # UserNotifierMailer.send_signup_email(@admin).deliver
+        # create sign_up_mailer and send email to a new Admin
         render json: { user: UserSerializer.new(@admin) }, status: :created
-
       else  
         render json: { header: "You need to fulfill these #{@admin.errors.full_messages.count} password requirements", error: @admin.errors.full_messages }, status: :bad_request 
       end
@@ -86,10 +81,9 @@ class UsersController < ApplicationController
   # FIX THIS
   def login 
     if !params[:email].blank? && !params[:password].blank?
-      # byebug
+
       user = User.find_by(email: params[:email])
 
-      # validates user and password (authentication)
       if user && user.authenticate(params[:password])
         # encrypt the user id ====> token = JWT.encode payload, password parameter, 'algorithm'
         # token = JWT.encode({ user_id: user.id }, "not_too_safe", "HS256")
@@ -107,7 +101,6 @@ class UsersController < ApplicationController
   end
 
   def autologin
-  # byebug
   # # extract the auth header
   # auth_header = request.headers['Authorization']
 
@@ -165,6 +158,7 @@ class UsersController < ApplicationController
     render json: { user: UserSerializer.new(user), projects: collectProjects, documents: collectDocuments }
   end
 
+
   private
     def user_invite_token
       params.require(:user).permit(:invite_token)
@@ -177,4 +171,5 @@ class UsersController < ApplicationController
     def user_admin_params
       params.require(:user).permit(:email, :first_name, :last_name, :job_title, :company, :password)
     end
+
 end

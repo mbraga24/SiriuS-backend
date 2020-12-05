@@ -1,4 +1,5 @@
 class ArchiveProjectsController < ApplicationController
+
   def index
     archived_projects = ArchiveProject.all.order("id DESC")
     render json: archived_projects
@@ -10,7 +11,6 @@ class ArchiveProjectsController < ApplicationController
   end
 
   def create
-    # byebug
     archived_project = ArchiveProject.create(
       name: params[:project][:name],
       description: params[:project][:description],
@@ -18,7 +18,6 @@ class ArchiveProjectsController < ApplicationController
       due_date: params[:project][:due_date],
       archived_date: Time.now.strftime("%m/%d/%Y")
     )
-    # byebug
     params[:project][:users].each do |user|
       ArchiveTree.create(
         user: User.find_by(email: user[:email]),
@@ -78,4 +77,5 @@ class ArchiveProjectsController < ApplicationController
     archiveProject.destroy
     render json: { header: "The project was deleted from your archive successfully", archiveId: archive_id }, status: :ok
   end  
+  
 end
