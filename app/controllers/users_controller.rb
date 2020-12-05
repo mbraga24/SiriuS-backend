@@ -43,7 +43,6 @@ class UsersController < ApplicationController
   def create 
     # if invite_token exists create user 
     if user_invite_token[:invite_token] && Invite.find_by(token: user_invite_token[:invite_token]).present?
-      
       invite = Invite.find_by(token: user_invite_token[:invite_token])
       @admin = invite.sender
       @user = User.new(user_params)
@@ -52,16 +51,12 @@ class UsersController < ApplicationController
       if @user.valid? 
         @user.save
           # encrypt the user id ====> token = JWT.encode payload, password parameter, 'algorithm'
-          # token = JWT.encode({ user_id: user.id }, "not_too_safe", "HS256")
-    
-          # if it validates to true renders json: user & token ====> run user explicitly through serializer
-          # render json: { user: userSerializer.new(user), token: token }
+          token = JWT.encode({ user_id: user.id }, "not_too_safe", "HS256")
           UserNotifierMailer.send_signup_email(@user, @admin).deliver
           # destroy invitation once user was created
           invite.destroy
-          render json: { user: UserSerializer.new(@user), invite: InviteSerializer.new(invite) }, status: :created
+          render json: { user: UserSerializer.new(@user), token: token, invite: InviteSerializer.new(invite) }, status: :created
       else
-  
         render json: { header: "Please fulfill these #{@user.errors.full_messages.count} requirements", error: @user.errors.full_messages }, status: :bad_request 
       end
     else
@@ -77,20 +72,17 @@ class UsersController < ApplicationController
     end
   end
 
-
-  # FIX THIS
   def login 
     if !params[:email].blank? && !params[:password].blank?
 
-      user = User.find_by(email: params[:email])
-
-      if user && user.authenticate(params[:password])
+      @user = User.find_by(email: params[:email])
+    
+      if @user && @user.authenticate(params[:password])
         # encrypt the user id ====> token = JWT.encode payload, password parameter, 'algorithm'
-        # token = JWT.encode({ user_id: user.id }, "not_too_safe", "HS256")
-
-        # if it validates to true renders json: user & token ====> run user explicitly through serializer
-        # render json: { user: userSerializer.new(user), token: token, header: "Welcome, #{user.first_name} #{user.last_name}!", message: [], type: "success" }
-        render json: { user: UserSerializer.new(user) }, status: :accepted
+        token = JWT.encode({ user_id: @user.id }, "not_too_safe", "HS256")
+        
+        # "Welcome, #{user.first_name} #{user.last_name}!"
+        render json: { user: UserSerializer.new(@user), token: token }, status: :accepted
       else
         render json: { header: "Something went wrong with your credentials.", message: [], type: "error" }, status: :unauthorized
       end
@@ -101,21 +93,21 @@ class UsersController < ApplicationController
   end
 
   def autologin
-  # # extract the auth header
-  # auth_header = request.headers['Authorization']
+    # byebug
+    # extract the auth header
+    auth_header = request.headers['Authorization']
 
-  # # split the string and get the encrypted token we need
-  # token = auth_header.split(" ")[1]
+    # split the string and get the encrypted token we need
+    token = auth_header.split(" ")[1]
 
-  # # decode token with JWT library
-  # decoded_token = JWT.decode(token, "not_too_safe", true, { algorthim: "HS256"})
+    # decode token with JWT library
+    decoded_token = JWT.decode(token, "not_too_safe", true, { algorthim: "HS256"})
 
-  # # get the user_id from decoded token
-  # user_id = decoded_token[0]["user_id"]
+    # get the user_id from decoded token
+    user_id = decoded_token[0]["user_id"]
 
-  # # find user by id 
-  # # user = user.find_by(id: user_id)
-    user = User.find_by(id: params[:id])
+    # find user by id 
+    user = User.find_by(id: user_id)
 
     if user
       render json: user
@@ -125,7 +117,6 @@ class UsersController < ApplicationController
   end
 
   def remove_project
-    # find project and user by their id
     project = Project.find_by(id: params[:project_id])
     user = User.find_by(id: params[:user_id])
     
@@ -136,7 +127,6 @@ class UsersController < ApplicationController
     # delete the association between the given project and user 
     ProjectTree.find_by(user_id: user.id, project_id: project.id).destroy
 
-    # return updated user and project to update redux store in the frontend
     render json: { user: UserSerializer.new(user), project: ProjectSerializer.new(project) }
   end
 
