@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :update, :show, :destroy]
   post '/signup', to: 'users#create'
   post '/login', to: 'users#login'
-  get '/autologin/:id', to: 'users#autologin'
+  get '/autologin', to: 'users#autologin'
   delete 'users/:user_id/remove-project/:project_id', to: 'users#remove_project'
 
   resources :archive_projects, only: [:index, :show, :create, :destroy]
