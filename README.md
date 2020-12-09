@@ -15,7 +15,7 @@ Invitation form and pending invitation page
 ![Preview-4](https://res.cloudinary.com/dloh9txdc/image/upload/v1607554430/IssueMeThis-Collages/SiriuS-Collage.006_oe8q8x.jpg)
 
 Collaborators list
-![Preview-5](https://res.cloudinary.com/dloh9txdc/image/upload/v1607554431/IssueMeThis-Collages/SiriuS-Collage.007_tcsfph.jpg)
+![Preview-5]()
 
 Collaborator history
 ![Preview-6](https://res.cloudinary.com/dloh9txdc/image/upload/v1607554430/IssueMeThis-Collages/SiriuS-Collage.004_jwgtgw.jpg)
