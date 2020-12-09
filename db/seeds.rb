@@ -163,7 +163,7 @@ random_users().each do |user|
 end
 
 # ========================================================================
-#     CREATE CUSTOM PROJECT ASSOCIATION FOR >JOHNATHAN< AND >WILLIAM<
+#     CREATE CUSTOM PROJECT ASSOCIATION FOR >SARAH< AND >WILLIAM<
 # ========================================================================
 
 Project.all.each do |pro|
@@ -175,12 +175,10 @@ end
 
 Project.all.each do |pro|
   ProjectTree.create(
-    user: john,
+    user: sarah,
     project: pro
   )
 end
-
-# Time.now.strftime("%m/%d/%Y")
 
 archived_project = ArchiveProject.create(
   name: "Rivver Menu Button",
