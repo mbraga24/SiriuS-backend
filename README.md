@@ -8,20 +8,24 @@ Home page
 Login page
 ![Preview-2](https://res.cloudinary.com/dloh9txdc/image/upload/v1607554430/IssueMeThis-Collages/SiriuS-Collage.002_kgx4vg.jpg)
 
-Admin Account
+Admin account
 ![Preview-3](https://res.cloudinary.com/dloh9txdc/image/upload/v1607554430/IssueMeThis-Collages/SiriuS-Collage.003_qduipd.jpg)
 
 Invitation form and pending invitation page
 ![Preview-4](https://res.cloudinary.com/dloh9txdc/image/upload/v1607554430/IssueMeThis-Collages/SiriuS-Collage.006_oe8q8x.jpg)
 
 Collaborators list
+<<<<<<< HEAD
 ![Preview-5]()
+=======
+![Preview-5](https://res.cloudinary.com/dloh9txdc/image/upload/v1607557280/IssueMeThis-Collages/collage.002_h8381n.jpg)
+>>>>>>> api-versioning
 
 Collaborator history
 ![Preview-6](https://res.cloudinary.com/dloh9txdc/image/upload/v1607554430/IssueMeThis-Collages/SiriuS-Collage.004_jwgtgw.jpg)
 
-Project page
-![Preview-7](https://res.cloudinary.com/dloh9txdc/image/upload/v1607554430/IssueMeThis-Collages/SiriuS-Collage.005_ocoq4z.jpg)
+Project view page
+![Preview-7](https://res.cloudinary.com/dloh9txdc/image/upload/v1607557280/IssueMeThis-Collages/collage.001_kgmhzs.jpg)
 
 <br />
 

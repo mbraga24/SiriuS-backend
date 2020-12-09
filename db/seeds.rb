@@ -12,21 +12,21 @@ User.destroy_all
 
 project_1 = Project.create(
   name: "Rivver website",
-  description: "This is a new account and a very important client. The team will be respossible for X and Y and we will be holding morning stand-up meetings for about 10-15 minutes to discuss our daily goals. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me any time of the day: (333)-444-9009",
+  description: "This is a new account and a very important client. The team will be respossible for X and Y and we will be holding stand-up meetings every morning at 10:30am sharp. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me at any time of the day: (333)-444-9009",
   start_date: "08/25/2020",
   due_date: "09/20/2020"
 )
 
 project_2 = Project.create(
   name: "Rivver mobile app",
-  description: "This is a new account and a very important client. The team will be respossible for X and Y and we will be holding morning stand-up meetings for about 10-15 minutes to discuss our daily goals. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me any time of the day: (333)-444-9009",
+  description: "This is a new account and a very important client. The team will be respossible for X and Y and we will be holding stand-up meetings every morning at 10:30am sharp. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me at any time of the day: (333)-444-9009",
   start_date: "08/27/2020",
   due_date: "09/20/2020"
 )
 
 project_3 = Project.create(
   name: "Rivver Website Menu",
-  description: "This is a new account and a very important client. The team will be respossible for X and Y and we will be holding morning stand-up meetings for about 10-15 minutes to discuss our daily goals. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me any time of the day: (333)-444-9009",
+  description: "This is a new account and a very important client. The team will be respossible for X and Y and we will be holding stand-up meetings every morning at 10:30am sharp. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me at any time of the day: (333)-444-9009",
   start_date: "08/21/2020",
   due_date: "09/20/2020"
 )
@@ -47,9 +47,9 @@ marlon = User.create(
 )
 
 mark = User.create(
-  email: "markkoslo@example.com",
+  email: "markk@example.com",
   first_name: "Mark",
-  last_name: "Koslo",
+  last_name: "Keathon",
   company: marlon.company,
   job_title: "Sr. Software Engineer",
   available: false,
@@ -68,10 +68,10 @@ franklin = User.create(
   password: "1L*vesalami"
 )
 
-marcelo = User.create(
-  email: "marcelo@example.com",
-  first_name: "Marcelo",
-  last_name: "Souza",
+marcela = User.create(
+  email: "marcela@example.com",
+  first_name: "Marcela",
+  last_name: "Water",
   job_title: "Sr. Software Engineer",
   company: marlon.company,
   available: false,
@@ -79,10 +79,10 @@ marcelo = User.create(
   password: "1L*vesalami"
 )
 
-andrew = User.create(
-  email: "andrew@example.com",
-  first_name: "Andrew",
-  last_name: "Cataluna",
+andressa = User.create(
+  email: "andressa@example.com",
+  first_name: "Andressa",
+  last_name: "Malta",
   job_title: "Data Analist",
   company: marlon.company,
   available: false,
@@ -101,9 +101,9 @@ daniel = User.create(
   password: "1L*vesalami"
 )
 
-john = User.create(
-  email: "johnathan@example.com",
-  first_name: "Johnathan",
+sarah = User.create(
+  email: "sarah@example.com",
+  first_name: "Sarah",
   last_name: "Kesviwich",
   job_title: "UI Designer",
   company: marlon.company,
@@ -128,7 +128,7 @@ will = User.create(
 # ========================================================================
 
 ALLOW_USERS = User.all.find_all do |user|
-  (user.email != 'william@example.com') && (user.email != 'johnathan@example.com') && (user.email != 'marlon@example.com') && (user.email != 'andrew@example.com')
+  (user.email != 'william@example.com') && (user.email != 'sarah@example.com') && (user.email != 'marlon@example.com') && (user.email != 'andressa@example.com')
 end
 
 def random_users 
@@ -163,7 +163,7 @@ random_users().each do |user|
 end
 
 # ========================================================================
-#     CREATE CUSTOM PROJECT ASSOCIATION FOR >JOHNATHAN< AND >WILLIAM<
+#     CREATE CUSTOM PROJECT ASSOCIATION FOR >SARAH< AND >WILLIAM<
 # ========================================================================
 
 Project.all.each do |pro|
@@ -175,16 +175,14 @@ end
 
 Project.all.each do |pro|
   ProjectTree.create(
-    user: john,
+    user: sarah,
     project: pro
   )
 end
 
-# Time.now.strftime("%m/%d/%Y")
-
 archived_project = ArchiveProject.create(
   name: "Rivver Menu Button",
-  description: "This is a new account and a very important client. The team will be respossible for X and Y and we will be holding morning stand-up meetings for about 10-15 minutes to discuss our daily goals. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me any time of the day: (333)-444-9009",
+  description: "This is a new account and a very important client. The team will be respossible for X and Y and we will be holding stand-up meetings every morning at 10:30am sharp. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me at any time of the day: (333)-444-9009",
   start_date: "08/21/2020",
   due_date: "09/20/2020",
   archived_date: "11/13/2020"
@@ -212,7 +210,7 @@ ArchiveDocument.create(
 # =============================================================================================
 
 ProjectTree.create(
-    user: andrew,
+    user: andressa,
     project: project_1
 )
 
@@ -226,7 +224,7 @@ document_1 = Document.create(
 document_2 = Document.create(
   name: "Project Requirements",
   url: "https://res.cloudinary.com/dloh9txdc/image/upload/v1604597179/Project_Requirements_-_Demo_zwe3qu.pdf",
-  user: andrew,
+  user: andressa,
   project: project_1
 )
 
@@ -249,7 +247,6 @@ document_4 = Document.create(
 # =============================================================================================
 
 User.all.each do |user| 
-  # user.email != "admin@example.com"
   if user.projects.count < 3
     toggle_user = User.find_by(id: user[:id]) 
     toggle_user.toggle!(:available)
