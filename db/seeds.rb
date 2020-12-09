@@ -11,21 +11,21 @@ User.destroy_all
 # ========================================================================
 
 project_1 = Project.create(
-  name: "Rivver SaaS website",
+  name: "Rivver website",
   description: "This is a new account and a very important client. The team will be respossible for X and Y and we will be holding morning stand-up meetings for about 10-15 minutes to discuss our daily goals. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me any time of the day: (333)-444-9009",
   start_date: "08/25/2020",
   due_date: "09/20/2020"
 )
 
 project_2 = Project.create(
-  name: "Rivver SaaS mobile app",
+  name: "Rivver mobile app",
   description: "This is a new account and a very important client. The team will be respossible for X and Y and we will be holding morning stand-up meetings for about 10-15 minutes to discuss our daily goals. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me any time of the day: (333)-444-9009",
   start_date: "08/27/2020",
   due_date: "09/20/2020"
 )
 
 project_3 = Project.create(
-  name: "Rivver SaaS Website Menu",
+  name: "Rivver Website Menu",
   description: "This is a new account and a very important client. The team will be respossible for X and Y and we will be holding morning stand-up meetings for about 10-15 minutes to discuss our daily goals. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me any time of the day: (333)-444-9009",
   start_date: "08/21/2020",
   due_date: "09/20/2020"
@@ -183,7 +183,7 @@ end
 # Time.now.strftime("%m/%d/%Y")
 
 archived_project = ArchiveProject.create(
-  name: "Rivver SaaS Menu Button",
+  name: "Rivver Menu Button",
   description: "This is a new account and a very important client. The team will be respossible for X and Y and we will be holding morning stand-up meetings for about 10-15 minutes to discuss our daily goals. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me any time of the day: (333)-444-9009",
   start_date: "08/21/2020",
   due_date: "09/20/2020",
