@@ -51,6 +51,10 @@ There was _much_ more I would've loved to add to this application such as graphs
 
 This MVP was built with the intent to solidify foundational skills on React as well as Rails as an API. There is still a lot of work to be done and learning to do but I am a proud creator of __SiriuS__.
 
+#### More on SiriuS
+
+In Portuguese we call a [crab](https://en.wikipedia.org/wiki/Crab) a _"Siri"_ (pl. _Siris_) and I used to love to see them walking in every direction, changing  directions kickly to avoid obstables (mostly me and my cousins chasing them), and quickly running to the water and finally letting the currents do the work and leading them away to whole new world. So I decided to play with the idea of the project management aspect of the app and that interesting animal from the Crustacean family and play with the words __Serious + Siri = _SIRIUS___. Managers and supervisors need to juggle so much all at once, meet deadlines, change strategies to achieve goals, and at one point after all that struggle they understand they've done their part and got where they invisioned them and their team and they know there is nothing else left to do than just "to jump in the water" and let the currents (the fruits of their hardwork) take them to another whelm of challenges and possibilities. That's what getting SiriuS means.
+
 Watch the [Demo](needs-to-work-ondemo)
 
 [Back To The Top](#sirius)
