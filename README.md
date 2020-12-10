@@ -43,11 +43,13 @@ Project view page
 
 ## Description
 
-Inspired by advanced project management applications such as Smartsheet, ClickUp, Atlassian, ProjectFox and other similar cutting edge softwares I wanted to practice my skills this time by building my own project management application. I introduce to you: SiriuS. In this application you can send emails to invite collaborators, keep track of all your invitations, manage collaborators, create and archive projects, share documents and more. For this MVP I wanted to reproduce a minimum amount of features for a demonstration. Also, I kepts in mind all forementioned softwares and decided to keep the design simple and clean so users can focus the attention on what really matters. 
+Inspired by sophisticated project management applications such as Smartsheet, ClickUp, Atlassian, ProjectFox and other similar cutting edge softwares I wanted to practice my skills this time by building my own project management application. I introduce to you: SiriuS. 
 
-There was _much_ more I would've loved to add to this application such as graphs, charts, to-do lists, open/close ticket tasks, and other great features but it's time to focus on honing other skills and expand on what this app taught me. I will definitely continue to work and clean up this project as I grow as I developer.
+In this application you can send emails to invite collaborators, keep track of all your invitations, manage collaborators, create and archive projects, share documents and more. For this MVP (Minimum Viable Product) I wanted to reproduce a minimum amount of features for the demonstration of the application. Also, I kept in mind all forementioned softwares and decided to keep the design simple and clean so users can focus the attention on what really matters. 
 
-This MVP was built with the intent to solidify foundational skills on React as well as Rails as an API. There is still a lot of work to be done and learning to do but I am a proud created of __SiriuS__.
+There was _much_ more I would've loved to add to this application such as graphs, charts, to-do lists, open/close ticket tasks, and other great features but it's time to focus on honing other skills and expand on what this app taught me. I will definitely continue to work and improve this project's code base and features as I grow as I developer.
+
+This MVP was built with the intent to solidify foundational skills on React as well as Rails as an API. There is still a lot of work to be done and learning to do but I am a proud creator of __SiriuS__.
 
 Watch the [Demo](needs-to-work-ondemo)
 
