@@ -45,17 +45,17 @@ Project view page
 
 Inspired by sophisticated project management applications such as Smartsheet, ClickUp, Atlassian, ProjectFox and other similar cutting edge softwares I wanted to practice my skills this time by building my own project management application. I introduce to you: SiriuS. 
 
-In this application you can send emails to invite collaborators, keep track of all your invitations, manage collaborators, create and archive projects, share documents and more. For this MVP (Minimum Viable Product) I wanted to reproduce a minimum amount of features for the demonstration of the application. Also, I kept in mind all forementioned softwares and decided to keep the design simple and clean so users can focus the attention on what really matters. 
+In this application you can send emails to invite collaborators, keep track of all your invitations, manage collaborators, create and archive projects, share documents and more. For this MVP (Minimum Viable Product) I wanted to reproduce a minimum amount of features for the demonstration of the application. Also, I kept in mind all forementioned softwares and decided to keep the design simple and clean so users can focus the attention on what really matters. I used Semantic UI React as my frontend Framework to focus less in CSS and more in learning React, Hooks, Redux, Rails, and developing the features I had in mind.
 
 There was _much_ more I would've loved to add to this application such as graphs, charts, to-do lists, open/close ticket tasks, and other great features but it's time to focus on honing other skills and expand on what this app taught me. I will definitely continue to work and improve this project's code base and features as I grow as I developer.
 
 This MVP was built with the intent to solidify foundational skills on React as well as Rails as an API. There is still a lot of work to be done and learning to do but I am a proud creator of __SiriuS__.
 
-#### More on SiriuS
+#### Inspiration
 
-In Portuguese we call a [crab](https://en.wikipedia.org/wiki/Crab) a [_"Siri"_](https://www.youtube.com/watch?v=K4PDorXSXEU&ab_channel=PronounceNames) (pl. _Siris_) and I used to love to see them walking in every direction, changing kickly to avoid obstables (mostly me and my cousins chasing them), and quickly running to the water and finally letting the currents do the work and surf away to a whole new world. So I decided to play with the idea of the project management aspect of the app and that interesting animal from the Crustacean family and play with the words __Serious + Siri = _SIRIUS___. 
+In Portuguese we call a [crab](https://en.wikipedia.org/wiki/Crab) a [_"Siri"_](https://www.youtube.com/watch?v=K4PDorXSXEU&ab_channel=PronounceNames) (pl. _Siris_) and I used to love watch them walking in every direction, changing kickly to avoid obstables (mostly me and my cousins chasing them), then quickly running to the water, catching the waves and allowing the currents to lead them back to the ocean. So I decided to play with the idea of the project management aspect of the app and that interesting ability of a crab to circumvent obstacles and play with the words __Serious + Siri = _SIRIUS___. 
 
-Managers and supervisors need to juggle so much all at once, meet deadlines, change strategies to achieve new or previous goals, and at one point after all that struggle they understand they've done their part and got where they invisioned them and their team and they know there is nothing else left to do than just "surf the waters" and let the currents (the fruits of their hard work) take them to another whelm of challenges but also possibilities. That's what getting __SiriuS__ means.
+Managers and supervisors have that incredible ability to juggle so many things all at once, meet deadlines, change strategies to achieve previous or new goals, and at one point after all that struggle they understand they've given their best and got where they invisioned them and their team and they know there is nothing else left to do than just "surf the waters" and let the currents (the fruits of their hard work) take them to another whelm of challenges but also possibilities. That's what getting __SiriuS__ means.
 
 Watch the [Demo](needs-to-work-ondemo)
 
@@ -71,6 +71,9 @@ Watch the [Demo](needs-to-work-ondemo)
 - React
 - Rails API
 - Cloudinary
+
+#### Libraries
+- [Semantic UI React](https://react.semantic-ui.com/)
 
 #### Rails Gems Used
 
