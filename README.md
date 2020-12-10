@@ -15,11 +15,7 @@ Invitation form and pending invitation page
 ![Preview-4](https://res.cloudinary.com/dloh9txdc/image/upload/v1607554430/IssueMeThis-Collages/SiriuS-Collage.006_oe8q8x.jpg)
 
 Collaborators list
-<<<<<<< HEAD
-![Preview-5]()
-=======
 ![Preview-5](https://res.cloudinary.com/dloh9txdc/image/upload/v1607557280/IssueMeThis-Collages/collage.002_h8381n.jpg)
->>>>>>> api-versioning
 
 Collaborator history
 ![Preview-6](https://res.cloudinary.com/dloh9txdc/image/upload/v1607554430/IssueMeThis-Collages/SiriuS-Collage.004_jwgtgw.jpg)
@@ -49,7 +45,9 @@ Project view page
 
 Inspired by advanced project management applications such as Smartsheet, ClickUp, Atlassian, ProjectFox and other similar cutting edge softwares I wanted to practice my skills this time by building my own project management application. I introduce to you: SiriuS. In this application you can send emails to invite collaborators, keep track of all your invitations, manage collaborators, create and archive projects, share documents and more. For this MVP I wanted to reproduce a minimum amount of features for a demonstration. Also, I kepts in mind all forementioned softwares and decided to keep the design simple and clean so users can focus the attention on what really matters. 
 
-There was much much more I would love to add to this application such as graphs, charts, to-do lists, open ticket taks, and other great features but it's time to focus on other skills at the moment. I will definitely continue to work and clean up this project as I grow as I developer.
+There was _much_ more I would've loved to add to this application such as graphs, charts, to-do lists, open/close ticket tasks, and other great features but it's time to focus on honing other skills and expand on what this app taught me. I will definitely continue to work and clean up this project as I grow as I developer.
+
+This MVP was built with the intent to solidify foundational skills on React as well as Rails as an API. There is still a lot of work to be done and learning to do but I am a proud created of __SiriuS__.
 
 Watch the [Demo](needs-to-work-ondemo)
 
