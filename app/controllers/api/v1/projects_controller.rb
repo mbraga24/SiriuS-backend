@@ -12,6 +12,11 @@ class Api::V1::ProjectsController < ApplicationController
 
   def update 
     project = Project.find_by(id: params[:id])
+
+    if params[:startDate] == "" || params[:dueDate] == "" 
+      params[:startDate] = project[:start_date]
+      params[:dueDate] = project[:due_date]
+    end
     
     project.update( 
       name: params[:name], 
