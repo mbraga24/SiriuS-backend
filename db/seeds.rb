@@ -12,21 +12,21 @@ User.destroy_all
 
 project_1 = Project.create(
   name: "Rivver website",
-  description: "This is a new account and a very important client. The team will be respossible for X and Y and we will be holding stand-up meetings every morning at 10:30am sharp. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me at any time of the day: (333)-444-9009",
+  description: "This is a new account and a very important client. The team will be responsible for X and Y and we will be holding stand-up meetings every morning at 10:30am sharp. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me at any time of the day: (333)-444-9009",
   start_date: "08/25/2020",
   due_date: "09/20/2020"
 )
 
 project_2 = Project.create(
   name: "Rivver mobile app",
-  description: "This is a new account and a very important client. The team will be respossible for X and Y and we will be holding stand-up meetings every morning at 10:30am sharp. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me at any time of the day: (333)-444-9009",
+  description: "This is a new account and a very important client. The team will be responsible for X and Y and we will be holding stand-up meetings every morning at 10:30am sharp. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me at any time of the day: (333)-444-9009",
   start_date: "08/27/2020",
   due_date: "09/20/2020"
 )
 
 project_3 = Project.create(
   name: "Rivver Website Menu",
-  description: "This is a new account and a very important client. The team will be respossible for X and Y and we will be holding stand-up meetings every morning at 10:30am sharp. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me at any time of the day: (333)-444-9009",
+  description: "This is a new account and a very important client. The team will be responsible for X and Y and we will be holding stand-up meetings every morning at 10:30am sharp. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me at any time of the day: (333)-444-9009",
   start_date: "08/21/2020",
   due_date: "09/20/2020"
 )
@@ -182,7 +182,7 @@ end
 
 archived_project = ArchiveProject.create(
   name: "Rivver Menu Button",
-  description: "This is a new account and a very important client. The team will be respossible for X and Y and we will be holding stand-up meetings every morning at 10:30am sharp. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me at any time of the day: (333)-444-9009",
+  description: "This is a new account and a very important client. The team will be responsible for X and Y and we will be holding stand-up meetings every morning at 10:30am sharp. If we conclude this project on time there is a great chance we can close future projects with this client. Please don't hesitate to reach out to me at any time of the day: (333)-444-9009",
   start_date: "08/21/2020",
   due_date: "09/20/2020",
   archived_date: "11/13/2020"
