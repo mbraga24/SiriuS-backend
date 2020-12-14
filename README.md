@@ -3,7 +3,7 @@
 ## Project Preview 
 
 Home page
-![Preview-1](https://res.cloudinary.com/dloh9txdc/image/upload/v1607554430/IssueMeThis-Collages/SiriuS-Collage.001_y1fren.jpg)
+![Preview-1](https://res.cloudinary.com/dloh9txdc/image/upload/v1607892624/SiriuS%20-%20Project%20Preview/SiriuS-Collage.001_s642qk.png)
 
 Login page
 ![Preview-2](https://res.cloudinary.com/dloh9txdc/image/upload/v1607554430/IssueMeThis-Collages/SiriuS-Collage.002_kgx4vg.jpg)
