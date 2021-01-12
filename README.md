@@ -67,8 +67,8 @@ Watch [Demo](https://www.youtube.com/watch?v=uvIL2b6WK18&ab_channel=MarlonBraga)
 
 #### Technologies
 
-- Ruby on Rails - Rails API
-- Cloudinary
+- Ruby on Rails - [Rails API](https://guides.rubyonrails.org/api_app.html)
+- [Cloudinary](https://cloudinary.com/)
 
 #### Rails Gems Used
 
