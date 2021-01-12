@@ -94,7 +94,7 @@ Watch [Demo](https://www.youtube.com/watch?v=uvIL2b6WK18&ab_channel=MarlonBraga)
 1. Run `bundle install` to download all the necessary gems.
 1. Run `rails db:migrate` to create the database.
 1. Run `rails db:seed` to seed the database with some auto-generated data.
-1. Follow follow the instructions for the [front-end portion](https://github.com/mrdbrg/SiriuS-frontend) of this application. 
+1. Follow the instructions for the [front-end portion](https://github.com/mrdbrg/SiriuS-frontend) of this application. 
 1. Run `rails s` to start the app.
 
 [Back To The Top](#sirius)
