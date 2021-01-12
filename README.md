@@ -6,26 +6,26 @@ Home page
 ![Preview-1](https://res.cloudinary.com/dloh9txdc/image/upload/v1607892624/SiriuS%20-%20Project%20Preview/SiriuS-Collage.001_s642qk.png)
 
 Login page
-![Preview-2](https://res.cloudinary.com/dloh9txdc/image/upload/v1607554430/IssueMeThis-Collages/SiriuS-Collage.002_kgx4vg.jpg)
+![Preview-2](https://res.cloudinary.com/dloh9txdc/image/upload/v1607554430/SiriuS%20-%20Project%20Preview/SiriuS-Collage.002_kgx4vg.jpg)
 
 Admin account
-![Preview-3](https://res.cloudinary.com/dloh9txdc/image/upload/v1607554430/IssueMeThis-Collages/SiriuS-Collage.003_qduipd.jpg)
+![Preview-3](https://res.cloudinary.com/dloh9txdc/image/upload/v1607554430/SiriuS%20-%20Project%20Preview/SiriuS-Collage.003_qduipd.jpg)
 
 Invitation form and pending invitation page
-![Preview-4](https://res.cloudinary.com/dloh9txdc/image/upload/v1607554430/IssueMeThis-Collages/SiriuS-Collage.006_oe8q8x.jpg)
+![Preview-4](https://res.cloudinary.com/dloh9txdc/image/upload/v1607554430/SiriuS%20-%20Project%20Preview/SiriuS-Collage.006_oe8q8x.jpg)
 
-Collaborators list
-![Preview-5](https://res.cloudinary.com/dloh9txdc/image/upload/v1607557280/IssueMeThis-Collages/collage.002_h8381n.jpg)
+List of collaborators
+![Preview-5](https://cloudinary.com/console/c-dd5fb29d42cfa41be8dc096fa79be4/media_library/folders/fa6003e772bae0328021312d80603a0b/asset/955be78ed0ccea1fe9c66188afbba91d/manage)
 
 Collaborator history
-![Preview-6](https://res.cloudinary.com/dloh9txdc/image/upload/v1607554430/IssueMeThis-Collages/SiriuS-Collage.004_jwgtgw.jpg)
+![Preview-6](https://res.cloudinary.com/dloh9txdc/image/upload/v1607554430/SiriuS%20-%20Project%20Preview/SiriuS-Collage.004_jwgtgw.jpg)
 
 Project view page
-![Preview-7](https://res.cloudinary.com/dloh9txdc/image/upload/v1607557280/IssueMeThis-Collages/collage.001_kgmhzs.jpg)
+![Preview-7](https://res.cloudinary.com/dloh9txdc/image/upload/v1607557280/SiriuS%20-%20Project%20Preview/collage.001_kgmhzs.jpg)
 
 <br />
 
-### Checkout the project [demo here](needs-to-work-ondemo)
+### Checkout more features of this project here: [Demo walkthrough](https://www.youtube.com/watch?v=uvIL2b6WK18&ab_channel=MarlonBraga)
 
 <br />
 
@@ -57,7 +57,7 @@ In Portuguese we call a [crab](https://en.wikipedia.org/wiki/Crab) a [_"Siri"_](
 
 Managers and supervisors have that incredible ability to juggle so many things at once, meet deadlines, change strategies to achieve previous or new goals, and after all that struggle they ultimately understand that they've given their best and achieved the goal that they envisioned for themselves and for their teams. They know there is nothing else left to do other than just "surf the waters" and let the currents (unpredictable variables) take them to another realm of challenges, but also possibilities. That's what getting __SiriuS__ means.
 
-Watch the [Demo](needs-to-work-ondemo)
+Watch [Demo](https://www.youtube.com/watch?v=uvIL2b6WK18&ab_channel=MarlonBraga)
 
 [Back To The Top](#sirius)
 
@@ -67,13 +67,8 @@ Watch the [Demo](needs-to-work-ondemo)
 
 #### Technologies
 
-- Javascript
-- React
-- Rails API
+- Ruby on Rails - Rails API
 - Cloudinary
-
-#### Libraries
-- [Semantic UI React](https://react.semantic-ui.com/)
 
 #### Rails Gems Used
 
@@ -91,15 +86,16 @@ Watch the [Demo](needs-to-work-ondemo)
 
 ## Installation
 
-#### [SiriuS - Frontend](https://github.com/mrdbrg/SiriuS-frontend)
-
-1. Fork and clone the repo
-1. npm install
-
 #### [SiriuS - Backend](https://github.com/mrdbrg/SiriuS-backend)
 
-1. Fork and clone the repo
-1. bundle install
+1. Fork this pository.
+1. Clone this repository onto your local machine.
+1. From your terminal `cd` into the project's folder.
+1. Run `bundle install` to download all the necessary gems.
+1. Run `rails db:migrate` to create the database.
+1. Run `rails db:seed` to seed the database with some auto-generated data.
+1. Follow follow the instructions for the [front-end portion](https://github.com/mrdbrg/SiriuS-frontend) of this application. 
+1. Run `rails s` to start the app.
 
 [Back To The Top](#sirius)
 
