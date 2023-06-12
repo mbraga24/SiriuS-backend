@@ -38,7 +38,7 @@ Project view page
 
 <br />
 
-### Check out more features of this project here: [Demo walkthrough](https://www.youtube.com/watch?v=uvIL2b6WK18&ab_channel=MarlonBraga)
+### Check out more features of this project here: [Demo walkthrough](https://www.youtube.com/watch?v=jxUIX6JdJtk&ab_channel=MarlonBraga)
 
 <br />
 
