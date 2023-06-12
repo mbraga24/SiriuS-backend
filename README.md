@@ -27,9 +27,6 @@ Admin account
 Invitation form and pending invitation page
 ![Preview-4](https://res.cloudinary.com/dloh9txdc/image/upload/v1607554430/SiriuS%20-%20Project%20Preview/SiriuS-Collage.006_oe8q8x.jpg)
 
-List of collaborators
-![Preview-5](https://cloudinary.com/console/c-dd5fb29d42cfa41be8dc096fa79be4/media_library/folders/fa6003e772bae0328021312d80603a0b/asset/955be78ed0ccea1fe9c66188afbba91d/manage)
-
 Collaborator history
 ![Preview-6](https://res.cloudinary.com/dloh9txdc/image/upload/v1607554430/SiriuS%20-%20Project%20Preview/SiriuS-Collage.004_jwgtgw.jpg)
 
