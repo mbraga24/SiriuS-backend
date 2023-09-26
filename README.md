@@ -115,6 +115,5 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 ## Author Info
 
 - LinkedIn - [Marlon Braga](https://www.linkedin.com/in/marlon-braga/)
-- Portfolio - [Currently unavailable and under construction](https://www.youtube.com/watch?v=oHg5SJYRHA0&ab_channel=cotter548)
 
 [Back To The Top](#sirius)
