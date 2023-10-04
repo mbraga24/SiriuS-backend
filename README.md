@@ -1,4 +1,4 @@
-# SiriuS
+# SiriuS :iphone:
 
 ---
 
