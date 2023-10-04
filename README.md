@@ -49,7 +49,7 @@ While there were additional features I desired to include, such as graphs and ch
 
 #### Name
 
-In Portuguese, we refer to a [crab](https://en.wikipedia.org/wiki/Crab) as a [_"Siri"_](https://www.youtube.com/watch?v=K4PDorXSXEU&ab_channel=PronounceNames) (pl. _Siris_), and I used to love watching them as they walked in various directions, swiftly changing course to avoid obstacles (usually my cousins and me chasing them), then promptly scurrying back to the water, riding the waves and allowing the currents to guide them back to the ocean. This inspired me to come up with the wordplay of __Serious + Siri__, resulting in ___SIRIUS___.
+In Portuguese, we refer to a [crab](https://en.wikipedia.org/wiki/Crab) as a [_"Siri"_](https://www.youtube.com/watch?v=K4PDorXSXEU&ab_channel=PronounceNames) (pl. _Siris_), and I used to love watching them as they walked in various directions, swiftly changing course to avoid obstacles (usually, my cousins and I chasing them), then promptly scurrying back to the water, riding the waves and allowing the currents to guide them back to the ocean. This inspired me to come up with the wordplay of __Serious + Siri__, resulting in ___SIRIUS___.
 
 
 Watch [Demo](https://www.youtube.com/watch?v=jxUIX6JdJtk&ab_channel=MarlonBraga)
