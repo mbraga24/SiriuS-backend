@@ -2,7 +2,7 @@
 
 ---
 
-### Table of Contents
+### Table of Contents :clipboard:
 
 - [Project Preview](#project-preview)
 - [Description](#description)
@@ -39,17 +39,16 @@ Project view page
 
 <br />
 
-## Description
+## Description & Idea :thought_balloon:
 
 Inspired by sophisticated project management applications like Smartsheet, ClickUp, Atlassian, ProjectFox, and other similar cutting-edge software, I sought to enhance my skills by building my very own project management application. Allow me to introduce SiriuS.
 
-Within this application, users can effortlessly send email invitations to collaborators, effortlessly track invitation status, efficiently manage collaborators, create and archive projects, and seamlessly share documents, among other functionalities. For this Minimum Viable Product (MVP), I aimed to showcase a select set of features that demonstrate the application's capabilities. Additionally, I strived to maintain a simple and clean design, drawing inspiration from the aforementioned software, enabling users to focus on what truly matters. To achieve this, I employed Semantic UI React as the frontend framework, minimizing CSS styling and emphasizing the use of React functional components, Hooks, Redux, and Rails for developing the envisioned features.
+Within this application, users can seamlessly send email invitations to collaborators, easily track invitation status, manage collaborators, create and archive projects, and share documents, among other functionalities. For this Minimum Viable Product (MVP), I aimed to showcase a select set of features that demonstrate the application's capabilities. Additionally, I strived to maintain a simple and clean design, drawing inspiration from the software companies mentioned above, enabling users to focus on what truly matters. To accomplish this, I utilized Semantic UI React as the frontend framework, prioritizing React functional components, Hooks, Redux, and Rails to develop the desired features.
 
-While there were additional features I desired to include, such as graphs and charts with metrics, to-do lists, ticket task management, and more, it is now time to concentrate on honing other skills and expanding upon the lessons this application has imparted. This MVP serves as a foundation for solidifying my React and Rails API skills. While there is still much work to be done, I take great pride in having worked on __SiriuS__.
+While there were additional features I had wished to include, such as graphs, charts with metrics, to-do lists, and ticket task management, it is now time to shift my focus towards refining other skills and building upon the lessons I've learned from this application. This MVP serves as a cornerstone for strengthening my React and Rails API skills. While there remains much work ahead, I take great pride in the progress I've made.
 
-#### Name
-
-In Portuguese, we refer to a [crab](https://en.wikipedia.org/wiki/Crab) as a [_"Siri"_](https://www.youtube.com/watch?v=K4PDorXSXEU&ab_channel=PronounceNames) (pl. _Siris_), and I used to love watching them as they walked in various directions, swiftly changing course to avoid obstacles (usually, my cousins and I chasing them), then promptly scurrying back to the water, riding the waves and allowing the currents to guide them back to the ocean. This inspired me to come up with the wordplay of __Serious + Siri__, resulting in ___SIRIUS___.
+#### Silly Name :octopus:
+In Portuguese, we refer to a [crab](https://en.wikipedia.org/wiki/Crab) as a [_"Siri"_](https://www.youtube.com/watch?v=K4PDorXSXEU&ab_channel=PronounceNames) (pl. _Siris_), and I used to love watching them at the beacnh, walking back and forth, changing course to avoid obstacles (usually, my cousins and I chasing them), then quickly return to the water. This inspired me to come up with the wordplay of __Serious + Siri__, or  ___SIRIUS___.
 
 
 Watch [Demo](https://www.youtube.com/watch?v=jxUIX6JdJtk&ab_channel=MarlonBraga)
@@ -58,9 +57,9 @@ Watch [Demo](https://www.youtube.com/watch?v=jxUIX6JdJtk&ab_channel=MarlonBraga)
 
 ---
 
-## References and Technologies
+## References and Technologies :computer:
 
-#### Technologies
+#### Technologies 
 
 - Ruby on Rails - [Rails API](https://guides.rubyonrails.org/api_app.html)
 - [Cloudinary](https://cloudinary.com/)
@@ -79,7 +78,7 @@ Watch [Demo](https://www.youtube.com/watch?v=jxUIX6JdJtk&ab_channel=MarlonBraga)
 
 ---
 
-## Installation
+## Installation :floppy_disk:
 
 #### [SiriuS - Backend](https://github.com/mrdbrg/SiriuS-backend)
 
@@ -96,23 +95,7 @@ Watch [Demo](https://www.youtube.com/watch?v=jxUIX6JdJtk&ab_channel=MarlonBraga)
 
 ---
 
-## License
-
-MIT License
-
-Copyright [2020] [Marlon Braga]
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
-
-[Back To The Top](#sirius)
-
----
-
-## Author Info
+## Author Info :frog:
 
 - LinkedIn - [Marlon Braga](https://www.linkedin.com/in/marlon-braga/)
 
