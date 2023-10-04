@@ -2,7 +2,8 @@
 
 ---
 
-### Table of Contents :clipboard:
+### Table of Contents 
+:clipboard:
 
 - [Project Preview](#project-preview)
 - [Description](#description)
