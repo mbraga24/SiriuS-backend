@@ -39,11 +39,11 @@ Project view page
 
 <br />
 
-## Description & Idea :thought_balloon:
+## Description & idea :thought_balloon:
 
 Inspired by sophisticated project management applications like Smartsheet, ClickUp, Atlassian, ProjectFox, and other similar cutting-edge software, I sought to enhance my skills by building my very own project management application. Allow me to introduce SiriuS.
 
-Within this application, users can seamlessly send email invitations to collaborators, easily track invitation status, manage collaborators, create and archive projects, and share documents, among other functionalities. For this Minimum Viable Product (MVP), I aimed to showcase a select set of features that demonstrate the application's capabilities. Additionally, I strived to maintain a simple and clean design, drawing inspiration from the software companies mentioned above, enabling users to focus on what truly matters. To accomplish this, I utilized Semantic UI React as the frontend framework, prioritizing React functional components, Hooks, Redux, and Rails to develop the desired features.
+Within this application, users can effortlessly send email invitations to collaborators, track invitation statuses, efficiently manage collaborators, create and archive projects, and share documents, among other functionalities. As part of this Minimum Viable Product (MVP), I aimed to showcase a select set of features that demonstrate the application's capabilities. Additionally, I strived to maintain a simple and clean design, drawing inspiration from the software companies mentioned above, enabling users to focus on what truly matters. To accomplish this, I utilized Semantic UI React as the frontend framework, prioritizing React functional components, Hooks, Redux, and Rails to develop the desired features.
 
 While there were additional features I had wished to include, such as graphs, charts with metrics, to-do lists, and ticket task management, it is now time to shift my focus towards refining other skills and building upon the lessons I've learned from this application. This MVP serves as a cornerstone for strengthening my React and Rails API skills. While there remains much work ahead, I take great pride in the progress I've made.
 
@@ -95,7 +95,7 @@ Watch [Demo](https://www.youtube.com/watch?v=jxUIX6JdJtk&ab_channel=MarlonBraga)
 
 ---
 
-## Author Info :frog:
+## Author Info :dog:
 
 - LinkedIn - [Marlon Braga](https://www.linkedin.com/in/marlon-braga/)
 
