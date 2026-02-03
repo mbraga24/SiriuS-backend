@@ -21,26 +21,33 @@ class Api::V1::SessionsController < ApplicationController
   end
 
   def autologin
-    # byebug
     # extract the auth header
     auth_header = request.headers['Authorization']
 
-    # split the string and get the encrypted token we need
-    token = auth_header.split(" ")[1]
+    if auth_header.present?
+      # split the string and get the encrypted token we need
+      token = auth_header.split(" ")[1]
 
-    # decode token with JWT library
-    decoded_token = JWT.decode(token, "not_too_safe", true, { algorthim: "HS256"})
+      begin
+        # decode token with JWT library (fixed typo: algorithm)
+        decoded_token = JWT.decode(token, "not_too_safe", true, { algorithm: "HS256"})
 
-    # get the user_id from decoded token
-    user_id = decoded_token[0]["user_id"]
+        # get the user_id from decoded token
+        user_id = decoded_token[0]["user_id"]
 
-    # find user by id 
-    user = User.find_by(id: user_id)
+        # find user by id 
+        user = User.find_by(id: user_id)
 
-    if user
-      render json: user
+        if user
+          render json: user
+        else
+          render json: { message: "User not found" }, status: :unauthorized
+        end
+      rescue JWT::DecodeError
+        render json: { message: "Invalid token" }, status: :unauthorized
+      end
     else
-      render json: { message: "You are not logged in" }, status: :unauthorized
+      render json: { message: "No authorization header" }, status: :unauthorized
     end
   end
 
