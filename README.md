@@ -1,102 +1,201 @@
-# SiriuS :iphone:
+# SiriuS 📱
+
+A Ruby on Rails API powering the SiriuS project management platform, providing authentication, project management, collaborator invitations, file sharing, and administrative capabilities.
 
 ---
 
-### Table of Contents :clipboard:
+## Table of Contents
 
-- [Project Preview](#project-preview)
-- [Description](#description)
-- [Installation](#installation)
-- [References And Technologies](#references-and-technologies)
-- [License](#license)
-- [Author Info](#author-info)
+* [Project Preview](#project-preview)
+* [Overview](#overview)
+* [Features](#features)
+* [Tech Stack](#tech-stack)
+* [Installation](#installation)
+* [Project Name Origin](#project-name-origin)
+* [Demo](#demo)
+* [Author](#author)
 
 ---
 
-## Project Preview 
+## Project Preview
 
-Home page
+### Home Page
+
 ![Preview-1](https://res.cloudinary.com/dloh9txdc/image/upload/v1607892624/SiriuS%20-%20Project%20Preview/SiriuS-Collage.001_s642qk.png)
 
-Login page
+### Login Page
+
 ![Preview-2](https://res.cloudinary.com/dloh9txdc/image/upload/v1607554430/SiriuS%20-%20Project%20Preview/SiriuS-Collage.002_kgx4vg.jpg)
 
-Admin account
+### Admin Dashboard
+
 ![Preview-3](https://res.cloudinary.com/dloh9txdc/image/upload/v1607554430/SiriuS%20-%20Project%20Preview/SiriuS-Collage.003_qduipd.jpg)
 
-Invitation form and pending invitation page
+### Invitations & Pending Invitations
+
 ![Preview-4](https://res.cloudinary.com/dloh9txdc/image/upload/v1607554430/SiriuS%20-%20Project%20Preview/SiriuS-Collage.006_oe8q8x.jpg)
 
-Collaborator history
+### Collaborator History
+
 ![Preview-6](https://res.cloudinary.com/dloh9txdc/image/upload/v1607554430/SiriuS%20-%20Project%20Preview/SiriuS-Collage.004_jwgtgw.jpg)
 
-Project view page
+### Project Details
+
 ![Preview-7](https://res.cloudinary.com/dloh9txdc/image/upload/v1607557280/SiriuS%20-%20Project%20Preview/collage.001_kgmhzs.jpg)
 
-<br />
+---
 
-### Check out more features of this project here: [Demo walkthrough](https://www.youtube.com/watch?v=jxUIX6JdJtk&ab_channel=MarlonBraga)
+## Overview
 
-<br />
+SiriuS is a project management application created to strengthen my full-stack development skills while building a practical, real-world collaboration platform.
 
-## Description & idea :thought_balloon:
+The backend is built using Ruby on Rails API and serves as the core engine of the application. It manages user authentication, collaborator invitations, project administration, document management, and business logic consumed by the React frontend.
 
-Inspired by sophisticated project management applications like Smartsheet, ClickUp, Atlassian, ProjectFox, and other similar cutting-edge software, I sought to enhance my skills by building my very own project management application. Allow me to introduce SiriuS.
+Inspired by project management solutions such as Smartsheet, ClickUp, and Jira, this API was designed to support common team collaboration workflows while maintaining a clean and scalable architecture.
 
-Within this application, users can effortlessly send email invitations to collaborators, track invitation statuses, efficiently manage collaborators, create and archive projects, and share documents, among other functionalities. As part of this Minimum Viable Product (MVP), I aimed to showcase a select set of features that demonstrate the application's capabilities. Additionally, I strived to maintain a simple and clean design, drawing inspiration from the software companies mentioned above, enabling users to focus on what truly matters. To accomplish this, I utilized Semantic UI React as the frontend framework, prioritizing React functional components, Hooks, Redux, and Rails to develop the desired features.
-
-While there were additional features I had wished to include, such as graphs, charts with metrics, to-do lists, and ticket task management, it is now time to shift my focus towards refining other skills and building upon the lessons I've learned from this application. This MVP serves as a cornerstone for strengthening my React and Rails API skills. While there remains much work ahead, I take great pride in the progress I've made.
-
-#### Silly Name :octopus:
-In Portuguese, we refer to a [crab](https://en.wikipedia.org/wiki/Crab) as a [_"Siri"_](https://www.youtube.com/watch?v=K4PDorXSXEU&ab_channel=PronounceNames) (pl. _Siris_), and I used to love watching them at the beacnh, walking back and forth, changing course to avoid obstacles (usually, my cousins and I chasing them), then quickly return to the water. This inspired me to come up with the wordplay of __Serious + Siri__, or  ___SIRIUS___.
-
-
-Watch [Demo](https://www.youtube.com/watch?v=jxUIX6JdJtk&ab_channel=MarlonBraga)
-
-[Back To The Top](#sirius)
+As a Minimum Viable Product (MVP), the project focuses on delivering essential functionality while providing valuable experience with API development, authentication, file management, and third-party integrations.
 
 ---
 
-## References and Technologies :computer:
+## Features
 
-#### Technologies 
-
-- Ruby on Rails - [Rails API](https://guides.rubyonrails.org/api_app.html)
-- [Cloudinary](https://cloudinary.com/)
-
-#### Rails Gems Used
-
-- [rubyzip](https://github.com/rubyzip/rubyzip)
-- [active_model_serializers](https://github.com/rails-api/active_model_serializers)
-- [ruby-jwt](https://github.com/jwt/ruby-jwt)
-- [cloudinary_gem](https://github.com/cloudinary/cloudinary_gem)
-- [figaro](https://github.com/laserlemon/figaro)
-- [bcrypt-ruby](https://github.com/codahale/bcrypt-ruby)
-- [rack-cors](https://github.com/cyu/rack-cors)
-
-[Back To The Top](#sirius)
+* RESTful API architecture
+* JWT-based authentication
+* User registration and login
+* Role-based authorization
+* Project creation and management
+* Project archiving
+* Collaborator invitations
+* Invitation status tracking
+* File and document uploads
+* Cloudinary file storage integration
+* JSON serialization
+* Cross-Origin Resource Sharing (CORS) support
+* Database seeding for development environments
 
 ---
 
-## Installation :floppy_disk:
+## Tech Stack
 
-#### [SiriuS - Backend](https://github.com/mrdbrg/SiriuS-backend)
+### Backend Framework
 
-1. Fork this pository.
-1. Clone this repository onto your local machine.
-1. From your terminal `cd` into the project's folder.
-1. Run `bundle install` to download all the necessary gems.
-1. Run `rails db:migrate` to create the database.
-1. Run `rails db:seed` to seed the database with some auto-generated data.
-1. Follow the instructions for the [front-end portion](https://github.com/mrdbrg/SiriuS-frontend) of this application. 
-1. Run `rails s` to start the app.
+* Ruby on Rails API
 
-[Back To The Top](#sirius)
+### Database
+
+* Active Record ORM
+* SQLite (Development)
+
+### Cloud Services
+
+* Cloudinary
+
+### Authentication & Security
+
+* JWT Authentication
+* BCrypt Password Hashing
+
+### API Serialization
+
+* Active Model Serializers
+
+### Supporting Gems
+
+* rubyzip
+* active_model_serializers
+* ruby-jwt
+* cloudinary_gem
+* figaro
+* bcrypt-ruby
+* rack-cors
 
 ---
 
-## Author Info :dog:
+## Installation
 
-- LinkedIn - [Marlon Braga](https://www.linkedin.com/in/marlon-braga/)
+### Prerequisites
 
-[Back To The Top](#sirius)
+* Ruby
+* Rails
+* Bundler
+* Node.js (for frontend integration)
+
+### Backend Repository
+
+Clone the repository:
+
+```bash
+git clone https://github.com/mbraga24/SiriuS-backend.git
+```
+
+Navigate into the project directory:
+
+```bash
+cd SiriuS-backend
+```
+
+Install project dependencies:
+
+```bash
+bundle install
+```
+
+Create and migrate the database:
+
+```bash
+rails db:migrate
+```
+
+Seed the database with sample data:
+
+```bash
+rails db:seed
+```
+
+Follow the setup instructions for the frontend application:
+
+**Frontend Repository:**
+https://github.com/mbraga24/SiriuS-frontend
+
+Start the Rails server:
+
+```bash
+rails s
+```
+
+The API will be available at:
+
+```text
+http://localhost:3000
+```
+
+---
+
+## Project Name Origin
+
+The name **SiriuS** comes from a personal childhood memory.
+
+In Portuguese, a crab is called a *"siri"*. Growing up, I enjoyed watching crabs move along the beach, constantly adjusting their path to avoid obstacles before quickly returning to the ocean.
+
+The name combines **"Siri"** with **"Serious"**, creating a playful reference that ultimately became **SiriuS**.
+
+---
+
+## Demo
+
+🎥 Watch the full project walkthrough:
+
+https://www.youtube.com/watch?v=jxUIX6JdJtk
+
+---
+
+## Author
+
+### Marlon Braga
+
+* GitHub: https://github.com/mbraga24
+* LinkedIn: https://www.linkedin.com/in/marlon-braga/
+
+---
+
+[Back To Top](#sirius)
